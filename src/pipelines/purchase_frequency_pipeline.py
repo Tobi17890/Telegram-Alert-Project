@@ -6,7 +6,18 @@ from src.analytics.purchase_frequency import (
 from src.config import PROJECT_ROOT
 from src.database import get_database_connection
 from src.query_service import fetch_dataframe_in_batches
+from src.config import (
+    PROJECT_ROOT,
+    get_telegram_settings,
+)
 
+from src.notifications.telegram_message import (
+    build_province_alert_messages,
+)
+
+from src.notifications.telegram_service import (
+    send_province_alert_messages,
+)
 
 OUTPUT_DIRECTORY = (
     PROJECT_ROOT
@@ -111,3 +122,48 @@ def run_purchase_frequency_pipeline() -> None:
     print("\nFiles created:")
     print(gap_output_path)
     print(summary_output_path)
+    print(
+    "\nPreparing Telegram alerts "
+    "grouped by province..."
+)
+
+    telegram_messages = (
+    build_province_alert_messages(
+        customer_summary=customer_summary,
+        max_rows_per_message=15,
+    )
+)
+
+    print(
+    "Telegram messages prepared: "
+    f"{len(telegram_messages):,}"
+)
+
+    bot_token, chat_id = (
+    get_telegram_settings()
+    )
+
+    print(
+    "\nSending real Telegram alerts..."
+    )
+
+    sent_messages = (
+        send_province_alert_messages(
+            messages=telegram_messages,
+            bot_token=bot_token,
+            chat_id=chat_id,
+        )
+    )
+
+    print(
+        "\nTelegram alert process completed."
+    )
+
+    print(
+        "\nTelegram alert process completed."
+    )
+
+    print(
+        "Messages sent successfully: "
+        f"{len(sent_messages):,}"
+    )
