@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv, find_dotenv
 
-
+# Function to get required environment variable, raises ValueError if not found
 def get_required_env(name: str) -> str:
     value = os.getenv(name)
 
@@ -11,7 +11,7 @@ def get_required_env(name: str) -> str:
 
     return value
 
-
+# Function to load settings from environment variables
 def load_settings() -> dict:
     load_dotenv(find_dotenv(), override=True)
 
