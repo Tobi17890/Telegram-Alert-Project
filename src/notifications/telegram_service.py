@@ -21,11 +21,7 @@ def send_telegram_message(
     chat_id: str,
     telegram_html: str,
 ) -> int:
-    """
-    Send one formatted Telegram message.
-
-    Returns the Telegram message ID.
-    """
+    """Send one formatted Telegram message."""
 
     if not telegram_html.strip():
         raise ValueError(
@@ -104,13 +100,10 @@ def send_telegram_message(
                 f"Reason: {description}"
             )
 
-        result = response_data.get(
-            "result",
-            {},
-        )
-
-        message_id = result.get(
-            "message_id"
+        message_id = (
+            response_data
+            .get("result", {})
+            .get("message_id")
         )
 
         if message_id is None:
@@ -131,9 +124,7 @@ def send_province_alert_messages(
     bot_token: str,
     chat_id: str,
 ) -> list[dict[str, object]]:
-    """
-    Send all province messages to one Telegram chat.
-    """
+    """Send all prepared province-alert messages."""
 
     if not messages:
         print(
@@ -155,6 +146,13 @@ def send_province_alert_messages(
             message["province"]
         )
 
+        section = str(
+            message.get(
+                "section",
+                "Customer Info",
+            )
+        )
+
         part_number = int(
             message["part_number"]
         )
@@ -167,6 +165,7 @@ def send_province_alert_messages(
             "\nSending message "
             f"{index}/{total_messages}: "
             f"{province}, "
+            f"{section}, "
             f"part {part_number}/{total_parts}"
         )
 
@@ -181,6 +180,7 @@ def send_province_alert_messages(
         sent_results.append(
             {
                 "province": province,
+                "section": section,
                 "part_number": part_number,
                 "total_parts": total_parts,
                 "message_id": message_id,
@@ -192,7 +192,6 @@ def send_province_alert_messages(
             f"Message ID: {message_id}"
         )
 
-        # Small delay between consecutive messages.
         time.sleep(0.3)
 
     return sent_results

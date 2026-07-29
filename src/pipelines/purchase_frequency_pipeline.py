@@ -1,23 +1,21 @@
-"""Extract CRT data and calculate customer purchase frequency."""
+"""Run the Phase 2 TPP customer-frequency Telegram pipeline."""
 
 from src.analytics.purchase_frequency import (
-    calculate_purchase_frequency,
+    enrich_customer_frequency_summary,
 )
-from src.config import PROJECT_ROOT
-from src.database import get_database_connection
-from src.query_service import fetch_dataframe_in_batches
 from src.config import (
     PROJECT_ROOT,
     get_telegram_settings,
 )
-
+from src.database import get_database_connection
 from src.notifications.telegram_message import (
     build_province_alert_messages,
 )
-
 from src.notifications.telegram_service import (
     send_province_alert_messages,
 )
+from src.query_service import fetch_dataframe
+
 
 OUTPUT_DIRECTORY = (
     PROJECT_ROOT
@@ -25,143 +23,183 @@ OUTPUT_DIRECTORY = (
     / "purchase_frequency"
 )
 
+EXPORT_GAP_DETAIL = False
 
-# Replace these four values with the exact CRT column names.
-CUSTOMER_ID_COLUMN = "Sold-to-party ID"
-CUSTOMER_NAME_COLUMN = "Sold-to-party Name"
-PROVINCE_COLUMN = "Sales District"
-BILLING_DATE_COLUMN = "Billing Date"
-DELIVERY_QUANTITY_COLUMN = "Net Amount"
+# Keep False while reviewing the new bordered message.
+# Change to True after checking the generated preview file.
+SEND_TELEGRAM = True
+
+MINIMUM_ALERT_PROBABILITY = 80.0
+MAX_ROWS_PER_MESSAGE = 15
 
 
 def run_purchase_frequency_pipeline() -> None:
     """
-    Fetch the complete CRT table and calculate customer frequency.
+    Fetch one SQL summary row per customer, enrich the result,
+    export CSV output, prepare Telegram alerts, and optionally send.
     """
 
     connection = get_database_connection()
+    purchase_gap_detail = None
 
     try:
-        print("\nFetching the complete CRT table...")
-
-        crt_dataframe = fetch_dataframe_in_batches(
-            connection=connection,
-            sql_filename="extracts/tpp_all.sql",
-            batch_size=20_000
+        print(
+            "\nFetching Phase 2 TPP customer summary "
+            "(one row per customer)..."
         )
+
+        customer_summary_base = fetch_dataframe(
+            connection=connection,
+            sql_filename=(
+                "analytics/"
+                "tpp_customer_frequency_summary.sql"
+            ),
+        )
+
+        if EXPORT_GAP_DETAIL:
+            print(
+                "\nFetching optional purchase-gap detail..."
+            )
+
+            purchase_gap_detail = fetch_dataframe(
+                connection=connection,
+                sql_filename=(
+                    "analytics/"
+                    "tpp_purchase_gap_detail.sql"
+                ),
+            )
 
     finally:
         connection.close()
         print("\nDatabase connection closed.")
 
-    print(f"\nCRT rows fetched: {len(crt_dataframe):,}")
-    print(f"CRT columns fetched: {len(crt_dataframe.columns):,}")
+    print(
+        "\nCustomer summary rows fetched: "
+        f"{len(customer_summary_base):,}"
+    )
 
-    print("\nAvailable CRT columns:")
-    for column in crt_dataframe.columns:
-        print(f" - {column}")
+    print(
+        "Customer summary columns fetched: "
+        f"{len(customer_summary_base.columns):,}"
+    )
 
-    purchase_gap_detail, customer_summary = (
-        calculate_purchase_frequency(
-            crt_dataframe=crt_dataframe,
-            customer_id_column=CUSTOMER_ID_COLUMN,
-            customer_name_column=CUSTOMER_NAME_COLUMN,
-            billing_date_column=BILLING_DATE_COLUMN,
-            delivery_quantity_column=DELIVERY_QUANTITY_COLUMN,
-            province_column=PROVINCE_COLUMN
-        )
+    customer_summary = enrich_customer_frequency_summary(
+        customer_summary_dataframe=customer_summary_base,
     )
 
     OUTPUT_DIRECTORY.mkdir(
         parents=True,
-        exist_ok=True
-    )
-
-    gap_output_path = (
-        OUTPUT_DIRECTORY
-        / "crt_purchase_gap_detail.csv"
+        exist_ok=True,
     )
 
     summary_output_path = (
         OUTPUT_DIRECTORY
-        / "crt_customer_frequency_summary.csv"
-    )
-
-    purchase_gap_detail.to_csv(
-        gap_output_path,
-        index=False,
-        encoding="utf-8-sig"
+        / "tpp_customer_frequency_summary.csv"
     )
 
     customer_summary.to_csv(
         summary_output_path,
         index=False,
-        encoding="utf-8-sig"
+        encoding="utf-8-sig",
     )
-
-    weekly_customers = customer_summary[
-        customer_summary["customer_category"]
-        == "Weekly Customer"
-    ]
-
-    print("\nCustomer-frequency results:")
-    print(f"Total customers: {len(customer_summary):,}")
-    print(f"Weekly customers: {len(weekly_customers):,}")
-
-    print("\nWeekly customer sample:")
-
-    if weekly_customers.empty:
-        print("No weekly customers were identified.")
-    else:
-        print(
-            weekly_customers.head(20).to_string(
-                index=False
-            )
-        )
 
     print("\nFiles created:")
-    print(gap_output_path)
     print(summary_output_path)
-    print(
-    "\nPreparing Telegram alerts "
-    "grouped by province..."
-)
 
-    telegram_messages = (
-    build_province_alert_messages(
-        customer_summary=customer_summary,
-        max_rows_per_message=15,
-    )
-)
-
-    print(
-    "Telegram messages prepared: "
-    f"{len(telegram_messages):,}"
-)
-
-    bot_token, chat_id = (
-    get_telegram_settings()
-    )
-
-    print(
-    "\nSending real Telegram alerts..."
-    )
-
-    sent_messages = (
-        send_province_alert_messages(
-            messages=telegram_messages,
-            bot_token=bot_token,
-            chat_id=chat_id,
+    if purchase_gap_detail is not None:
+        gap_output_path = (
+            OUTPUT_DIRECTORY
+            / "tpp_purchase_gap_detail.csv"
         )
+
+        purchase_gap_detail.to_csv(
+            gap_output_path,
+            index=False,
+            encoding="utf-8-sig",
+        )
+
+        print(gap_output_path)
+
+    telegram_messages = build_province_alert_messages(
+        customer_summary=customer_summary,
+        max_rows_per_message=MAX_ROWS_PER_MESSAGE,
+        minimum_probability=MINIMUM_ALERT_PROBABILITY,
     )
 
+    active_alerts = customer_summary[
+        (customer_summary["customer_status"] == "Active")
+        & (
+            customer_summary[
+                "purchase_probability_percent"
+            ]
+            >= MINIMUM_ALERT_PROBABILITY
+        )
+    ]
+
+    inactive_alerts = customer_summary[
+        (customer_summary["customer_status"] == "Inactive")
+        & (
+            customer_summary[
+                "purchase_probability_percent"
+            ]
+            >= MINIMUM_ALERT_PROBABILITY
+        )
+    ]
+
+    print("\nTelegram alert results:")
     print(
-        "\nTelegram alert process completed."
+        "Active due customers: "
+        f"{len(active_alerts):,}"
+    )
+    print(
+        "Inactive re-engagement customers: "
+        f"{len(inactive_alerts):,}"
+    )
+    print(
+        "Telegram messages prepared: "
+        f"{len(telegram_messages):,}"
     )
 
-    print(
-        "\nTelegram alert process completed."
+    preview_output_path = (
+        OUTPUT_DIRECTORY
+        / "telegram_alert_preview.txt"
     )
+
+    preview_text = (
+        "\n\n"
+        + ("=" * 80)
+        + "\n\n"
+    ).join(
+        str(message["plain_text"])
+        for message in telegram_messages
+    )
+
+    preview_output_path.write_text(
+        preview_text,
+        encoding="utf-8",
+    )
+
+    print(preview_output_path)
+
+    if not SEND_TELEGRAM:
+        print(
+            "\nTelegram sending is disabled. "
+            "Review telegram_alert_preview.txt, "
+            "then set SEND_TELEGRAM = True."
+        )
+        return
+
+    bot_token, chat_id = get_telegram_settings()
+
+    print("\nSending real Telegram alerts...")
+
+    sent_messages = send_province_alert_messages(
+        messages=telegram_messages,
+        bot_token=bot_token,
+        chat_id=chat_id,
+    )
+
+    print("\nTelegram alert process completed.")
 
     print(
         "Messages sent successfully: "

@@ -1,4 +1,4 @@
-"""Create Telegram customer-alert messages grouped by province."""
+"""Create compact Telegram customer alerts grouped by province."""
 
 import math
 from html import escape
@@ -7,13 +7,35 @@ from zoneinfo import ZoneInfo
 import pandas as pd
 
 
+TELEGRAM_MESSAGE_LIMIT = 4096
+DEFAULT_MINIMUM_PROBABILITY = 60.0
+
 CATEGORY_DISPLAY_NAMES = {
     "Weekly Customer": "Weekly",
-    "Bi-Weekly Customer": "Bi-Weekly",
+    "Bi-Weekly Customer": "BiWkly",
     "Monthly Customer": "Monthly",
-    "Bi-Monthly Customer": "Bi-Monthly",
-    "Inactive Customer": "Inactive",
-    "Insufficient Purchase History": "Insufficient",
+    "Bi-Monthly Customer": "BiMthly",
+    "One-Time Customer": "OneTime",
+    "Occasional Customer": "Occasnl",
+}
+
+SECTION_DISPLAY_NAMES = {
+    "Active": "Customer Info - Due / Active",
+    "Inactive": "Customer Info - Re-engagement",
+}
+
+STATUS_SORT_ORDER = {
+    "Active": 0,
+    "Inactive": 1,
+}
+
+COLUMN_WIDTHS = {
+    "ID": 8,
+    "Name": 14,
+    "Last": 8,
+    "Type": 7,
+    "Status": 8,
+    "Prob": 4,
 }
 
 
@@ -21,9 +43,7 @@ def shorten_text(
     value: object,
     maximum_width: int,
 ) -> str:
-    """
-    Convert a value to text and shorten long values.
-    """
+    """Convert a value to text and shorten long values."""
 
     if pd.isna(value):
         text = ""
@@ -45,9 +65,7 @@ def shorten_text(
 def format_last_purchase(
     days_since_last_purchase: object,
 ) -> str:
-    """
-    Format days since last purchase as readable text.
-    """
+    """Format days since last purchase as compact text."""
 
     if pd.isna(days_since_last_purchase):
         return "N/A"
@@ -55,23 +73,15 @@ def format_last_purchase(
     days = int(days_since_last_purchase)
 
     if days < 0:
-        return "Future date"
+        return "Future"
 
-    if days == 0:
-        return "Today"
-
-    if days == 1:
-        return "1 day ago"
-
-    return f"{days} days ago"
+    return f"{days}d-ago"
 
 
 def format_customer_type(
     customer_category: object,
 ) -> str:
-    """
-    Shorten the internal customer-category description.
-    """
+    """Shorten the customer type for the Telegram table."""
 
     if pd.isna(customer_category):
         return "Unknown"
@@ -86,15 +96,173 @@ def format_customer_type(
     )
 
 
+def format_probability(
+    probability: object,
+) -> str:
+    """Format the displayed probability as a whole percent."""
+
+    if pd.isna(probability):
+        return "N/A"
+
+    percentage = max(
+        0,
+        min(
+            int(round(float(probability))),
+            100,
+        ),
+    )
+
+    return f"{percentage}%"
+
+
+def _format_cell(
+    value: object,
+    width: int,
+) -> str:
+    """Shorten and left-align one table cell."""
+
+    text = shorten_text(
+        value=value,
+        maximum_width=width,
+    )
+
+    return f" {text:<{width}} "
+
+
+def _build_border(
+    left: str,
+    middle: str,
+    right: str,
+) -> str:
+    """Build one horizontal box-table border."""
+
+    segments = [
+        "─" * (width + 2)
+        for width in COLUMN_WIDTHS.values()
+    ]
+
+    return (
+        left
+        + middle.join(segments)
+        + right
+    )
+
+
+def _build_table(
+    rows: pd.DataFrame,
+) -> list[str]:
+    """Build a bordered fixed-width table."""
+
+    top_border = _build_border(
+        "┌",
+        "┬",
+        "┐",
+    )
+
+    middle_border = _build_border(
+        "├",
+        "┼",
+        "┤",
+    )
+
+    bottom_border = _build_border(
+        "└",
+        "┴",
+        "┘",
+    )
+
+    header_values = list(
+        COLUMN_WIDTHS.keys()
+    )
+
+    header_line = (
+        "│"
+        + "│".join(
+            _format_cell(
+                header,
+                COLUMN_WIDTHS[header],
+            )
+            for header in header_values
+        )
+        + "│"
+    )
+
+    lines = [
+        top_border,
+        header_line,
+        middle_border,
+    ]
+
+    for row_position, (_, row) in enumerate(
+        rows.iterrows()
+    ):
+        values = {
+            "ID": row["customer_id"],
+            "Name": row["customer_name"],
+            "Last": format_last_purchase(
+                row["days_since_last_purchase"]
+            ),
+            "Type": format_customer_type(
+                row["customer_category"]
+            ),
+            "Status": row["customer_status"],
+            "Prob": format_probability(
+                row[
+                    "purchase_probability_percent"
+                ]
+            ),
+        }
+
+        row_line = (
+            "│"
+            + "│".join(
+                _format_cell(
+                    values[column],
+                    width,
+                )
+                for column, width
+                in COLUMN_WIDTHS.items()
+            )
+            + "│"
+        )
+
+        lines.append(
+            row_line
+        )
+
+        is_last_row = (
+            row_position
+            == len(rows) - 1
+        )
+
+        if is_last_row:
+            lines.append(
+                bottom_border
+            )
+        else:
+            lines.append(
+                middle_border
+            )
+
+    return lines
+
+
 def build_province_alert_messages(
     customer_summary: pd.DataFrame,
     max_rows_per_message: int = 15,
+    minimum_probability: float = (
+        DEFAULT_MINIMUM_PROBABILITY
+    ),
 ) -> list[dict[str, object]]:
     """
-    Build one or more Telegram messages for every province.
+    Build compact purchase alerts grouped by province and status.
 
-    No customers are filtered here. Every record in
-    customer_summary is included.
+    Included customers:
+    - purchase_probability_percent >= minimum_probability
+    - customer_status is Active or Inactive
+
+    Active customers and inactive re-engagement customers are
+    placed into separate message sections.
     """
 
     required_columns = [
@@ -103,6 +271,8 @@ def build_province_alert_messages(
         "province",
         "days_since_last_purchase",
         "customer_category",
+        "customer_status",
+        "purchase_probability_percent",
     ]
 
     missing_columns = [
@@ -124,9 +294,35 @@ def build_province_alert_messages(
             "max_rows_per_message must be greater than zero."
         )
 
+    if not 0 <= minimum_probability <= 100:
+        raise ValueError(
+            "minimum_probability must be between 0 and 100."
+        )
+
     data = customer_summary[
         required_columns
     ].copy()
+
+    data["purchase_probability_percent"] = pd.to_numeric(
+        data["purchase_probability_percent"],
+        errors="coerce",
+    )
+
+    data = data[
+        data["customer_status"].isin(
+            [
+                "Active",
+                "Inactive",
+            ]
+        )
+        & (
+            data["purchase_probability_percent"]
+            >= minimum_probability
+        )
+    ].copy()
+
+    if data.empty:
+        return []
 
     data["province"] = (
         data["province"]
@@ -152,10 +348,26 @@ def build_province_alert_messages(
         .str.strip()
     )
 
+    data["status_sort_order"] = (
+        data["customer_status"]
+        .map(STATUS_SORT_ORDER)
+        .fillna(99)
+    )
+
     data = data.sort_values(
         [
             "province",
+            "status_sort_order",
+            "purchase_probability_percent",
+            "days_since_last_purchase",
             "customer_name",
+        ],
+        ascending=[
+            True,
+            True,
+            False,
+            False,
+            True,
         ],
         na_position="last",
     ).reset_index(drop=True)
@@ -171,131 +383,103 @@ def build_province_alert_messages(
         sort=True,
         dropna=False,
     ):
-        province_data = (
-            province_data
-            .reset_index(drop=True)
-        )
+        for status in [
+            "Active",
+            "Inactive",
+        ]:
+            section_data = province_data[
+                province_data["customer_status"]
+                == status
+            ].reset_index(drop=True)
 
-        total_customers = len(
-            province_data
-        )
-
-        if total_customers == 0:
-            continue
-
-        total_parts = math.ceil(
-            total_customers
-            / max_rows_per_message
-        )
-
-        for part_index in range(
-            total_parts
-        ):
-            start_index = (
-                part_index
-                * max_rows_per_message
+            total_customers = len(
+                section_data
             )
 
-            end_index = (
-                start_index
-                + max_rows_per_message
+            if total_customers == 0:
+                continue
+
+            total_parts = math.ceil(
+                total_customers
+                / max_rows_per_message
             )
 
-            part_data = province_data.iloc[
-                start_index:end_index
-            ]
-
-            part_number = (
-                part_index + 1
-            )
-
-            lines = [
-                "CMI Depot Purchase Prediction Alert",
-                "",
-                f"Date: {today_text}",
-                f"Region: {province}",
-            ]
-
-            if total_parts > 1:
-                lines.append(
-                    f"Part: {part_number}/{total_parts}"
+            for part_index in range(
+                total_parts
+            ):
+                start_index = (
+                    part_index
+                    * max_rows_per_message
                 )
 
-            lines.extend(
-                [
+                end_index = (
+                    start_index
+                    + max_rows_per_message
+                )
+
+                part_data = section_data.iloc[
+                    start_index:end_index
+                ]
+
+                part_number = (
+                    part_index + 1
+                )
+
+                lines = [
+                    "CMI Depot Purchase Prediction Alert",
                     "",
+                    f"Date: {today_text}",
+                    f"Region: {province}",
                     (
-                        f"{'Customer ID':<12} | "
-                        f"{'Customer Name':<22} | "
-                        f"{'Last Purchase':<14} | "
-                        f"{'Customer Type':<12}"
-                    ),
-                    (
-                        f"{'-' * 12}-+-"
-                        f"{'-' * 22}-+-"
-                        f"{'-' * 14}-+-"
-                        f"{'-' * 12}"
+                        "Alert Rule: "
+                        f"Probability >= "
+                        f"{minimum_probability:g}%"
                     ),
                 ]
-            )
 
-            for _, row in part_data.iterrows():
-                customer_id = shorten_text(
-                    row["customer_id"],
-                    12,
+                if total_parts > 1:
+                    lines.append(
+                        f"Part: "
+                        f"{part_number}/{total_parts}"
+                    )
+
+                lines.extend(
+                    [
+                        "",
+                        SECTION_DISPLAY_NAMES[status],
+                        *_build_table(
+                            part_data
+                        ),
+                    ]
                 )
 
-                customer_name = shorten_text(
-                    row["customer_name"],
-                    22,
+                plain_text = "\n".join(
+                    lines
                 )
 
-                last_purchase = shorten_text(
-                    format_last_purchase(
-                        row[
-                            "days_since_last_purchase"
-                        ]
-                    ),
-                    14,
+                telegram_html = (
+                    f"<pre>{escape(plain_text)}</pre>"
                 )
 
-                customer_type = shorten_text(
-                    format_customer_type(
-                        row["customer_category"]
-                    ),
-                    12,
+                if len(telegram_html) > TELEGRAM_MESSAGE_LIMIT:
+                    raise ValueError(
+                        "A Telegram message exceeded "
+                        "4,096 characters. Reduce "
+                        "max_rows_per_message."
+                    )
+
+                messages.append(
+                    {
+                        "province": str(province),
+                        "section": status,
+                        "part_number": part_number,
+                        "total_parts": total_parts,
+                        "customer_count": len(
+                            part_data
+                        ),
+                        "plain_text": plain_text,
+                        "telegram_html": telegram_html,
+                    }
                 )
-
-                lines.append(
-                    f"{customer_id:<12} | "
-                    f"{customer_name:<22} | "
-                    f"{last_purchase:<14} | "
-                    f"{customer_type:<12}"
-                )
-
-            plain_text = "\n".join(
-                lines
-            )
-
-            if len(plain_text) > 4096:
-                raise ValueError(
-                    "A Telegram message exceeded "
-                    "4,096 characters. Reduce "
-                    "max_rows_per_message."
-                )
-
-            telegram_html = (
-                f"<pre>{escape(plain_text)}</pre>"
-            )
-
-            messages.append(
-                {
-                    "province": str(province),
-                    "part_number": part_number,
-                    "total_parts": total_parts,
-                    "plain_text": plain_text,
-                    "telegram_html": telegram_html,
-                }
-            )
 
     return messages
