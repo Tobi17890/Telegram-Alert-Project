@@ -5,7 +5,7 @@ from zoneinfo import ZoneInfo
 
 
 def calculate_purchase_frequency(
-    crt_dataframe: pd.DataFrame,
+    tpp_dataframe: pd.DataFrame,
     customer_id_column: str,
     customer_name_column: str,
     billing_date_column: str,
@@ -40,18 +40,18 @@ def calculate_purchase_frequency(
     missing_columns = [
         column
         for column in required_columns
-        if column not in crt_dataframe.columns
+        if column not in tpp_dataframe.columns
     ]
 
     if missing_columns:
         raise KeyError(
-            "The following required CRT columns were not found:\n"
+            "The following required TPP columns were not found:\n"
             f"{missing_columns}\n\n"
             "Available columns:\n"
-            f"{list(crt_dataframe.columns)}"
+            f"{list(tpp_dataframe.columns)}"
         )
 
-    data = crt_dataframe[
+    data = tpp_dataframe[
         required_columns
     ].copy()
 

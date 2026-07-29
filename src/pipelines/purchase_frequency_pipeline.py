@@ -1,4 +1,4 @@
-"""Extract CRT data and calculate customer purchase frequency."""
+"""Extract TPP data and calculate customer purchase frequency."""
 
 from src.analytics.purchase_frequency import (
     calculate_purchase_frequency,
@@ -15,7 +15,7 @@ OUTPUT_DIRECTORY = (
 )
 
 
-# Replace these four values with the exact CRT column names.
+# Replace these four values with the exact TPP column names.
 CUSTOMER_ID_COLUMN = "Sold-to-party ID"
 CUSTOMER_NAME_COLUMN = "Sold-to-party Name"
 PROVINCE_COLUMN = "Sales District"
@@ -25,15 +25,15 @@ DELIVERY_QUANTITY_COLUMN = "Net Amount"
 
 def run_purchase_frequency_pipeline() -> None:
     """
-    Fetch the complete CRT table and calculate customer frequency.
+    Fetch the complete TPP table and calculate customer frequency.
     """
 
     connection = get_database_connection()
 
     try:
-        print("\nFetching the complete CRT table...")
+        print("\nFetching the complete TPP table...")
 
-        crt_dataframe = fetch_dataframe_in_batches(
+        tpp_dataframe = fetch_dataframe_in_batches(
             connection=connection,
             sql_filename="extracts/tpp_all.sql",
             batch_size=20_000
@@ -43,16 +43,16 @@ def run_purchase_frequency_pipeline() -> None:
         connection.close()
         print("\nDatabase connection closed.")
 
-    print(f"\nCRT rows fetched: {len(crt_dataframe):,}")
-    print(f"CRT columns fetched: {len(crt_dataframe.columns):,}")
+    print(f"\nTPP rows fetched: {len(tpp_dataframe):,}")
+    print(f"TPP columns fetched: {len(tpp_dataframe.columns):,}")
 
-    print("\nAvailable CRT columns:")
-    for column in crt_dataframe.columns:
+    print("\nAvailable TPP columns:")
+    for column in tpp_dataframe.columns:
         print(f" - {column}")
 
     purchase_gap_detail, customer_summary = (
         calculate_purchase_frequency(
-            crt_dataframe=crt_dataframe,
+            tpp_dataframe=tpp_dataframe,
             customer_id_column=CUSTOMER_ID_COLUMN,
             customer_name_column=CUSTOMER_NAME_COLUMN,
             billing_date_column=BILLING_DATE_COLUMN,
@@ -68,12 +68,12 @@ def run_purchase_frequency_pipeline() -> None:
 
     gap_output_path = (
         OUTPUT_DIRECTORY
-        / "crt_purchase_gap_detail.csv"
+        / "tpp_purchase_gap_detail.csv"
     )
 
     summary_output_path = (
         OUTPUT_DIRECTORY
-        / "crt_customer_frequency_summary.csv"
+        / "tpp_customer_frequency_summary.csv"
     )
 
     purchase_gap_detail.to_csv(
