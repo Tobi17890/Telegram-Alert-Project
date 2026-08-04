@@ -33,7 +33,8 @@ def send_text_to_telegram(bot_token: str, chat_id: str, message: str):
 
     payload = {
         "chat_id": chat_id,
-        "text": message,
+        "message_thread_id": message_thread_id,
+        "text": telegram_html,
         "parse_mode": "HTML",
     }
 

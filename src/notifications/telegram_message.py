@@ -29,6 +29,17 @@ STATUS_SORT_ORDER = {
     "Inactive": 1,
 }
 
+# Sorting priority inside each Active/Inactive section.
+# Lower number = shown first.
+CATEGORY_SORT_ORDER = {
+    "Weekly Customer": 0,
+    "Bi-Weekly Customer": 1,
+    "Monthly Customer": 2,
+    "Bi-Monthly Customer": 3,
+    "Occasional Customer": 4,
+    "One-Time Customer": 5,
+}
+
 COLUMN_WIDTHS = {
     "ID": 8,
     "Name": 14,
@@ -263,6 +274,18 @@ def build_province_alert_messages(
 
     Active customers and inactive re-engagement customers are
     placed into separate message sections.
+
+    Inside each status section, customers are sorted by:
+    1. Weekly
+    2. Bi-Weekly
+    3. Monthly
+    4. Bi-Monthly
+    5. Occasional
+    6. One-Time
+    7. Any other category
+
+    Within the same customer type, customers with the greatest
+    days_since_last_purchase are shown first.
     """
 
     required_columns = [
@@ -354,18 +377,24 @@ def build_province_alert_messages(
         .fillna(99)
     )
 
+    data["category_sort_order"] = (
+        data["customer_category"]
+        .map(CATEGORY_SORT_ORDER)
+        .fillna(99)
+    )
+
     data = data.sort_values(
         [
             "province",
             "status_sort_order",
-            "purchase_probability_percent",
+            "category_sort_order",
             "days_since_last_purchase",
             "customer_name",
         ],
         ascending=[
             True,
             True,
-            False,
+            True,
             False,
             True,
         ],

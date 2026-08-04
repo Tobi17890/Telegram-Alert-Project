@@ -1,197 +1,378 @@
-"""Send formatted customer alerts through Telegram."""
+"""Send customer alerts using personal Telegram account."""
 
-import time
+import asyncio
 
-import requests
+from telethon import TelegramClient
+from telethon.errors import FloodWaitError
 
 
-TELEGRAM_API_BASE_URL = (
-    "https://api.telegram.org"
+# ============================================
+# TELEGRAM ACCOUNT SETTINGS
+# ============================================
+
+# Keep your existing API ID here.
+API_ID = 20722579
+
+# Keep your existing API HASH here.
+API_HASH = "45fb209e7760bb6f4dae0a3d1983a5c2"
+
+
+SESSION_NAME = (
+    "notebooks/my_telegram_session"
 )
 
 
-class TelegramSendError(
-    RuntimeError
-):
-    """Raised when Telegram cannot send a message."""
+# ============================================
+# SENDING SETTINGS
+# ============================================
+
+# Normal delay between successful messages.
+MESSAGE_DELAY_SECONDS = 3
+
+# Extra safety time after Telegram's
+# required FloodWait duration.
+FLOOD_WAIT_BUFFER_SECONDS = 5
 
 
-def send_telegram_message(
-    bot_token: str,
-    chat_id: str,
+# ============================================
+# SEND ONE TELEGRAM MESSAGE
+# ============================================
+
+async def send_telegram_message(
+    client: TelegramClient,
+    chat_id: int,
+    message_thread_id: int,
     telegram_html: str,
 ) -> int:
-    """Send one formatted Telegram message."""
+    """
+    Send one message to a specific Telegram forum topic
+    using the logged-in personal Telegram account.
+
+    If Telegram applies a FloodWait,
+    automatically wait and retry the same message.
+    """
 
     if not telegram_html.strip():
         raise ValueError(
             "Telegram message cannot be empty."
         )
 
-    url = (
-        f"{TELEGRAM_API_BASE_URL}"
-        f"/bot{bot_token}/sendMessage"
-    )
+    while True:
 
-    payload = {
-        "chat_id": chat_id,
-        "text": telegram_html,
-        "parse_mode": "HTML",
-    }
-
-    for attempt in range(2):
         try:
-            response = requests.post(
-                url,
-                json=payload,
-                timeout=(10, 30),
+
+            sent_message = await client.send_message(
+                entity=chat_id,
+                message=telegram_html,
+                parse_mode="html",
+                reply_to=message_thread_id,
             )
 
-        except requests.RequestException as error:
-            raise TelegramSendError(
-                "Could not connect to Telegram."
-            ) from error
+            return int(
+                sent_message.id
+            )
 
-        try:
-            response_data = response.json()
+        except FloodWaitError as error:
 
-        except ValueError as error:
-            raise TelegramSendError(
-                "Telegram returned an invalid response.\n"
-                f"HTTP status: {response.status_code}\n"
-                f"Response: {response.text}"
-            ) from error
-
-        if (
-            response.status_code == 429
-            and attempt == 0
-        ):
-            retry_after = int(
-                response_data
-                .get("parameters", {})
-                .get("retry_after", 1)
+            wait_seconds = int(
+                error.seconds
             )
 
             print(
-                "Telegram requested a delay of "
-                f"{retry_after} second(s)."
+                "\n========================================"
             )
 
-            time.sleep(
-                max(retry_after, 1)
+            print(
+                "TELEGRAM RATE LIMIT DETECTED"
             )
 
-            continue
+            print(
+                "========================================"
+            )
 
-        if (
-            not response.ok
-            or not response_data.get("ok")
+            print(
+                "Telegram requires a wait of "
+                f"{wait_seconds} second(s)."
+            )
+
+            print(
+                "The program will wait automatically."
+            )
+
+            print(
+                "Do NOT restart the program."
+            )
+
+            print(
+                "========================================"
+            )
+
+            await asyncio.sleep(
+                wait_seconds
+                + FLOOD_WAIT_BUFFER_SECONDS
+            )
+
+            print(
+                "\nFloodWait finished."
+            )
+
+            print(
+                "Retrying the same message..."
+            )
+
+
+# ============================================
+# SEND ALL ROUTED MESSAGES
+# ============================================
+
+async def _send_all_messages(
+    messages: list[dict[str, object]],
+) -> list[dict[str, object]]:
+    """
+    Send all prepared Telegram messages
+    using one personal Telegram session.
+    """
+
+    sent_results = []
+
+    async with TelegramClient(
+        SESSION_NAME,
+        API_ID,
+        API_HASH,
+    ) as client:
+
+        total_messages = len(
+            messages
+        )
+
+        print(
+            "\n========================================"
+        )
+
+        print(
+            "TELEGRAM SENDING STARTED"
+        )
+
+        print(
+            "========================================"
+        )
+
+        print(
+            "Total messages to send: "
+            f"{total_messages:,}"
+        )
+
+
+        for index, message in enumerate(
+            messages,
+            start=1,
         ):
-            description = (
-                response_data.get(
-                    "description",
-                    response.text,
+
+            # ==================================
+            # MESSAGE INFORMATION
+            # ==================================
+
+            province = str(
+                message["province"]
+            )
+
+            region = str(
+                message["region"]
+            )
+
+            section = str(
+                message.get(
+                    "section",
+                    "Customer Info",
                 )
             )
 
-            raise TelegramSendError(
-                "Telegram rejected the message.\n"
-                f"HTTP status: {response.status_code}\n"
-                f"Reason: {description}"
+            chat_id = int(
+                message["chat_id"]
             )
 
-        message_id = (
-            response_data
-            .get("result", {})
-            .get("message_id")
-        )
-
-        if message_id is None:
-            raise TelegramSendError(
-                "Telegram accepted the message "
-                "but returned no message ID."
+            message_thread_id = int(
+                message[
+                    "message_thread_id"
+                ]
             )
 
-        return int(message_id)
+            part_number = int(
+                message.get(
+                    "part_number",
+                    1,
+                )
+            )
 
-    raise TelegramSendError(
-        "Message failed after retrying."
+            total_parts = int(
+                message.get(
+                    "total_parts",
+                    1,
+                )
+            )
+
+
+            # ==================================
+            # CONSOLE INFORMATION
+            # ==================================
+
+            print(
+                "\n----------------------------------------"
+            )
+
+            print(
+                f"Sending message "
+                f"{index}/{total_messages}"
+            )
+
+            print(
+                f"Region: {region}"
+            )
+
+            print(
+                f"Province: {province}"
+            )
+
+            print(
+                f"Section: {section}"
+            )
+
+            print(
+                f"Chat ID: {chat_id}"
+            )
+
+            print(
+                "Topic ID: "
+                f"{message_thread_id}"
+            )
+
+            print(
+                f"Part: "
+                f"{part_number}/"
+                f"{total_parts}"
+            )
+
+
+            # ==================================
+            # SEND
+            # ==================================
+
+            message_id = (
+                await send_telegram_message(
+                    client=client,
+                    chat_id=chat_id,
+                    message_thread_id=(
+                        message_thread_id
+                    ),
+                    telegram_html=str(
+                        message[
+                            "telegram_html"
+                        ]
+                    ),
+                )
+            )
+
+
+            # ==================================
+            # STORE RESULT
+            # ==================================
+
+            sent_results.append(
+                {
+                    "region": region,
+                    "province": province,
+                    "section": section,
+                    "chat_id": chat_id,
+                    "message_thread_id": (
+                        message_thread_id
+                    ),
+                    "part_number": (
+                        part_number
+                    ),
+                    "total_parts": (
+                        total_parts
+                    ),
+                    "message_id": (
+                        message_id
+                    ),
+                }
+            )
+
+
+            print(
+                "Sent successfully."
+            )
+
+            print(
+                "Telegram Message ID: "
+                f"{message_id}"
+            )
+
+
+            # ==================================
+            # NORMAL MESSAGE DELAY
+            # ==================================
+            #
+            # Do not send messages too rapidly
+            # from the personal Telegram account.
+            # ==================================
+
+            if index < total_messages:
+
+                print(
+                    "Waiting "
+                    f"{MESSAGE_DELAY_SECONDS} "
+                    "second(s) before next message..."
+                )
+
+                await asyncio.sleep(
+                    MESSAGE_DELAY_SECONDS
+                )
+
+
+    print(
+        "\n========================================"
     )
 
+    print(
+        "TELEGRAM SENDING COMPLETED"
+    )
+
+    print(
+        "========================================"
+    )
+
+    print(
+        "Messages successfully sent: "
+        f"{len(sent_results):,}"
+    )
+
+    return sent_results
+
+
+# ============================================
+# SYNCHRONOUS PIPELINE WRAPPER
+# ============================================
 
 def send_province_alert_messages(
     messages: list[dict[str, object]],
-    bot_token: str,
-    chat_id: str,
 ) -> list[dict[str, object]]:
-    """Send all prepared province-alert messages."""
+    """
+    Synchronous wrapper used by
+    purchase_frequency_pipeline.py.
+    """
 
     if not messages:
+
         print(
-            "No Telegram messages were generated."
+            "No Telegram messages "
+            "were generated."
         )
+
         return []
 
-    sent_results: list[
-        dict[str, object]
-    ] = []
-
-    total_messages = len(messages)
-
-    for index, message in enumerate(
-        messages,
-        start=1,
-    ):
-        province = str(
-            message["province"]
+    return asyncio.run(
+        _send_all_messages(
+            messages=messages,
         )
-
-        section = str(
-            message.get(
-                "section",
-                "Customer Info",
-            )
-        )
-
-        part_number = int(
-            message["part_number"]
-        )
-
-        total_parts = int(
-            message["total_parts"]
-        )
-
-        print(
-            "\nSending message "
-            f"{index}/{total_messages}: "
-            f"{province}, "
-            f"{section}, "
-            f"part {part_number}/{total_parts}"
-        )
-
-        message_id = send_telegram_message(
-            bot_token=bot_token,
-            chat_id=chat_id,
-            telegram_html=str(
-                message["telegram_html"]
-            ),
-        )
-
-        sent_results.append(
-            {
-                "province": province,
-                "section": section,
-                "part_number": part_number,
-                "total_parts": total_parts,
-                "message_id": message_id,
-            }
-        )
-
-        print(
-            "Sent successfully. "
-            f"Message ID: {message_id}"
-        )
-
-        time.sleep(0.3)
-
-    return sent_results
+    )
