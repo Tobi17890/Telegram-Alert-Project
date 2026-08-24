@@ -19,3 +19,6 @@ logs/*.log
 
 # VS Code temporary settings
 .vscode/
+
+#exclude excel files
+outputs/

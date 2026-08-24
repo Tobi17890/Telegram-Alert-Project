@@ -13,7 +13,7 @@ from src.pipelines.crt_purchase_frequency_pipeline import (
 # WHICH PRODUCTS TO RUN
 # ============================================
 
-RUN_TPP = False
+RUN_TPP = True
 
 RUN_CRT = True
 

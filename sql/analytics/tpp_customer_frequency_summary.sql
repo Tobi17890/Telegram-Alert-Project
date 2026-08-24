@@ -48,6 +48,16 @@ WITH valid_purchase_rows AS (
             LTRIM(RTRIM([Sold-to-party ID])),
             N''
         ) IS NOT NULL
+
+        AND NULLIF(
+            LTRIM(RTRIM([Sold-to-party ID])),
+            ''
+        ) NOT LIKE '14%'
+
+        AND NULLIF(
+            LTRIM(RTRIM([Sold-to-party ID])),
+            ''
+        ) NOT LIKE '15%'
 ),
 
 purchase_days AS (

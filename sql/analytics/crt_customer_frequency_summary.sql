@@ -33,6 +33,16 @@ WITH valid_delivery_rows AS (
             LTRIM(RTRIM([Sold-to-party ID])),
             ''
         ) IS NOT NULL
+
+        AND NULLIF(
+            LTRIM(RTRIM([Sold-to-party ID])),
+            ''
+        ) NOT LIKE '14%'
+
+                AND NULLIF(
+            LTRIM(RTRIM([Sold-to-party ID])),
+            ''
+        ) NOT LIKE '15%'
 ),
 
 

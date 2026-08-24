@@ -14,6 +14,7 @@ from src.database import (
 
 from src.notifications.telegram_message import (
     build_province_alert_messages,
+    prepare_alert_customers,
 )
 
 from src.notifications.telegram_routes import (
@@ -21,11 +22,19 @@ from src.notifications.telegram_routes import (
 )
 
 from src.notifications.telegram_service import (
-    send_province_alert_messages,
+    send_province_alert_packages,
 )
 
 from src.query_service import (
     fetch_dataframe,
+)
+
+from src.tracking.alert_history import (
+    update_daily_alert_history,
+)
+
+from src.reports.province_alert_excel import (
+    export_province_alert_excels,
 )
 
 
@@ -40,6 +49,14 @@ OUTPUT_DIRECTORY = (
 )
 
 
+ALERT_HISTORY_PATH = (
+    PROJECT_ROOT
+    / "outputs"
+    / "alert_tracking"
+    / "alert_history.csv"
+)
+
+
 # ============================================
 # PIPELINE SETTINGS
 # ============================================
@@ -48,13 +65,12 @@ OUTPUT_DIRECTORY = (
 EXPORT_GAP_DETAIL = False
 
 
-# Keep False during testing.
-# Change to True only after checking preview.
+# IMPORTANT:
+# Keep False while checking Excel previews.
 SEND_TELEGRAM = True
 
 
-# Same Telegram alert threshold
-# currently used for TPP.
+# Telegram / Excel alert threshold.
 MINIMUM_ALERT_PROBABILITY = 60.0
 
 
@@ -69,21 +85,31 @@ MAX_ROWS_PER_MESSAGE = 15
 
 def run_crt_purchase_frequency_pipeline() -> None:
     """
-    Run the CRT purchase-frequency pipeline.
+    Run the complete CRT customer alert pipeline.
 
-    CRT logic:
+    Flow:
 
-    1. Fetch one SQL summary row per customer.
-    2. SQL has already converted consecutive
-       delivery dates into CRT purchase events.
-    3. Apply customer type.
-    4. Calculate days since last purchase.
-    5. Calculate Active / Inactive status.
-    6. Calculate purchase probability.
-    7. Export CSV.
-    8. Build Telegram alerts.
-    9. Route CRT alerts to CRT Telegram topics.
-    10. Optionally send using personal Telegram account.
+    SQL
+        ↓
+    CRT customer summary
+        ↓
+    Customer type / status / probability
+        ↓
+    Alert history
+        ↓
+    Today's qualified alert customers
+        ↓
+    Telegram messages
+        ↓
+    Telegram routing
+        ↓
+    Verify Telegram = Excel
+        ↓
+    Telegram preview
+        ↓
+    Province Excel previews
+        ↓
+    Optional Telegram send
     """
 
     # ========================================
@@ -96,12 +122,14 @@ def run_crt_purchase_frequency_pipeline() -> None:
 
     purchase_gap_detail = None
 
+
     try:
 
         print(
             "\nFetching CRT customer summary "
             "(one row per customer)..."
         )
+
 
         # ====================================
         # CRT CUSTOMER SUMMARY
@@ -119,7 +147,7 @@ def run_crt_purchase_frequency_pipeline() -> None:
 
 
         # ====================================
-        # OPTIONAL CRT GAP DETAIL
+        # OPTIONAL GAP DETAIL
         # ====================================
 
         if EXPORT_GAP_DETAIL:
@@ -139,6 +167,7 @@ def run_crt_purchase_frequency_pipeline() -> None:
                 )
             )
 
+
     finally:
 
         connection.close()
@@ -157,14 +186,17 @@ def run_crt_purchase_frequency_pipeline() -> None:
         f"{len(customer_summary_base):,}"
     )
 
+
     print(
         "CRT customer summary columns fetched: "
         f"{len(customer_summary_base.columns):,}"
     )
 
+
     print(
         "\nColumns returned by CRT SQL:"
     )
+
 
     for column in (
         customer_summary_base.columns
@@ -199,7 +231,100 @@ def run_crt_purchase_frequency_pipeline() -> None:
 
 
     # ========================================
-    # EXPORT CRT SUMMARY
+    # UPDATE INTERNAL ALERT HISTORY
+    # ========================================
+
+    print(
+        "\nUpdating CRT alert tracking history..."
+    )
+
+
+    today_tracking = (
+        update_daily_alert_history(
+            customer_summary=(
+                customer_summary
+            ),
+            product="CRT",
+            minimum_probability=(
+                MINIMUM_ALERT_PROBABILITY
+            ),
+            history_path=(
+                ALERT_HISTORY_PATH
+            ),
+        )
+    )
+
+
+    print(
+        "\nCRT tracking rows generated today: "
+        f"{len(today_tracking):,}"
+    )
+
+
+    # ========================================
+    # PREPARE EXACT ALERT CUSTOMERS
+    # ========================================
+    #
+    # This is the shared population used
+    # by BOTH:
+    #
+    # Telegram
+    # Province Excel
+    #
+    # Rules:
+    # - Active or Inactive
+    # - Probability >= 60%
+    # - IDs 14xxxx / 15xxxx excluded
+    #
+    # ========================================
+
+    alert_customers = (
+        prepare_alert_customers(
+            customer_summary=(
+                customer_summary
+            ),
+            minimum_probability=(
+                MINIMUM_ALERT_PROBABILITY
+            ),
+        )
+    )
+
+
+    print(
+        "\nCRT customers qualifying "
+        "for today's alert: "
+        f"{len(alert_customers):,}"
+    )
+
+
+    # ========================================
+    # EXPORT TODAY'S INTERNAL TRACKING PREVIEW
+    # ========================================
+
+    tracking_preview_path = (
+        OUTPUT_DIRECTORY
+        / "crt_alert_tracking_preview.csv"
+    )
+
+
+    today_tracking.to_csv(
+        tracking_preview_path,
+        index=False,
+        encoding="utf-8-sig",
+    )
+
+
+    print(
+        "\nCRT tracking preview created:"
+    )
+
+    print(
+        tracking_preview_path
+    )
+
+
+    # ========================================
+    # EXPORT CRT CUSTOMER SUMMARY
     # ========================================
 
     summary_output_path = (
@@ -207,14 +332,16 @@ def run_crt_purchase_frequency_pipeline() -> None:
         / "crt_customer_frequency_summary.csv"
     )
 
+
     customer_summary.to_csv(
         summary_output_path,
         index=False,
         encoding="utf-8-sig",
     )
 
+
     print(
-        "\nCRT files created:"
+        "\nCRT customer summary created:"
     )
 
     print(
@@ -233,10 +360,16 @@ def run_crt_purchase_frequency_pipeline() -> None:
             / "crt_purchase_gap_detail.csv"
         )
 
+
         purchase_gap_detail.to_csv(
             gap_output_path,
             index=False,
             encoding="utf-8-sig",
+        )
+
+
+        print(
+            "\nCRT purchase gap detail created:"
         )
 
         print(
@@ -255,12 +388,14 @@ def run_crt_purchase_frequency_pipeline() -> None:
         == "Weekly Customer"
     ]
 
+
     biweekly_customers = customer_summary[
         customer_summary[
             "customer_category"
         ]
         == "Bi-Weekly Customer"
     ]
+
 
     monthly_customers = customer_summary[
         customer_summary[
@@ -269,6 +404,7 @@ def run_crt_purchase_frequency_pipeline() -> None:
         == "Monthly Customer"
     ]
 
+
     bimonthly_customers = customer_summary[
         customer_summary[
             "customer_category"
@@ -276,12 +412,14 @@ def run_crt_purchase_frequency_pipeline() -> None:
         == "Bi-Monthly Customer"
     ]
 
+
     occasional_customers = customer_summary[
         customer_summary[
             "customer_category"
         ]
         == "Occasional Customer"
     ]
+
 
     one_time_customers = customer_summary[
         customer_summary[
@@ -295,35 +433,42 @@ def run_crt_purchase_frequency_pipeline() -> None:
         "\nCRT customer-frequency results:"
     )
 
+
     print(
         "Total CRT customers: "
         f"{len(customer_summary):,}"
     )
+
 
     print(
         "Weekly: "
         f"{len(weekly_customers):,}"
     )
 
+
     print(
         "Bi-Weekly: "
         f"{len(biweekly_customers):,}"
     )
+
 
     print(
         "Monthly: "
         f"{len(monthly_customers):,}"
     )
 
+
     print(
         "Bi-Monthly: "
         f"{len(bimonthly_customers):,}"
     )
 
+
     print(
         "Occasional: "
         f"{len(occasional_customers):,}"
     )
+
 
     print(
         "One-Time: "
@@ -332,12 +477,50 @@ def run_crt_purchase_frequency_pipeline() -> None:
 
 
     # ========================================
-    # BUILD CRT TELEGRAM MESSAGES
+    # CURRENT ALERT STATISTICS
+    # ========================================
+
+    active_alerts = alert_customers[
+        alert_customers[
+            "customer_status"
+        ]
+        == "Active"
+    ]
+
+
+    inactive_alerts = alert_customers[
+        alert_customers[
+            "customer_status"
+        ]
+        == "Inactive"
+    ]
+
+
+    print(
+        "\nToday's CRT alert customers:"
+    )
+
+
+    print(
+        "Active due CRT customers: "
+        f"{len(active_alerts):,}"
+    )
+
+
+    print(
+        "Inactive re-engagement CRT customers: "
+        f"{len(inactive_alerts):,}"
+    )
+
+
+    # ========================================
+    # BUILD TELEGRAM MESSAGES
     # ========================================
 
     print(
         "\nPreparing CRT Telegram alerts..."
     )
+
 
     telegram_messages = (
         build_province_alert_messages(
@@ -362,23 +545,7 @@ def run_crt_purchase_frequency_pipeline() -> None:
 
 
     # ========================================
-    # CRT TELEGRAM ROUTING
-    # ========================================
-    #
-    # IMPORTANT:
-    #
-    # product="CRT"
-    #
-    # Example:
-    #
-    # CRT + Kandal
-    # -> R1
-    # -> R1-CRT / Kandal
-    #
-    # CRT + Phnom Penh
-    # -> R1
-    # -> R1-CRT / PP
-    #
+    # ROUTE TELEGRAM MESSAGES
     # ========================================
 
     routed_messages = []
@@ -389,8 +556,11 @@ def run_crt_purchase_frequency_pipeline() -> None:
     for message in telegram_messages:
 
         province = str(
-            message["province"]
+            message[
+                "province"
+            ]
         ).strip()
+
 
         try:
 
@@ -401,12 +571,14 @@ def run_crt_purchase_frequency_pipeline() -> None:
                 )
             )
 
+
         except KeyError:
 
             print(
                 "Skipping CRT Telegram route: "
                 f"CRT / {province}"
             )
+
 
             skipped_messages.append(
                 message
@@ -425,7 +597,7 @@ def run_crt_purchase_frequency_pipeline() -> None:
 
 
         # ====================================
-        # ADD TELEGRAM DESTINATION
+        # ADD ROUTING INFORMATION
         # ====================================
 
         routed_message[
@@ -434,11 +606,13 @@ def run_crt_purchase_frequency_pipeline() -> None:
             "region"
         ]
 
+
         routed_message[
             "chat_id"
         ] = route[
             "chat_id"
         ]
+
 
         routed_message[
             "message_thread_id"
@@ -453,80 +627,84 @@ def run_crt_purchase_frequency_pipeline() -> None:
 
 
     # ========================================
-    # ALERT CUSTOMER COUNTS
+    # ROUTING RESULTS
     # ========================================
-
-    active_alerts = customer_summary[
-        (
-            customer_summary[
-                "customer_status"
-            ]
-            == "Active"
-        )
-        &
-        (
-            customer_summary[
-                "purchase_probability_percent"
-            ]
-            >= MINIMUM_ALERT_PROBABILITY
-        )
-    ]
-
-
-    inactive_alerts = customer_summary[
-        (
-            customer_summary[
-                "customer_status"
-            ]
-            == "Inactive"
-        )
-        &
-        (
-            customer_summary[
-                "purchase_probability_percent"
-            ]
-            >= MINIMUM_ALERT_PROBABILITY
-        )
-    ]
-
 
     print(
         "\nCRT Telegram alert results:"
     )
 
-    print(
-        "Active due CRT customers: "
-        f"{len(active_alerts):,}"
-    )
 
     print(
-        "Inactive CRT re-engagement customers: "
-        f"{len(inactive_alerts):,}"
-    )
-
-    print(
-        "CRT messages generated: "
+        "Messages generated: "
         f"{len(telegram_messages):,}"
     )
 
+
     print(
-        "CRT messages routed: "
+        "Messages routed: "
         f"{len(routed_messages):,}"
     )
 
+
     print(
-        "CRT messages skipped: "
+        "Messages skipped: "
         f"{len(skipped_messages):,}"
     )
 
 
     # ========================================
-    # PRINT ROUTING
+    # NOW GET ROUTED PROVINCES
+    # ========================================
+    #
+    # IMPORTANT:
+    # This MUST happen AFTER routed_messages
+    # has been populated.
+    #
+    # ========================================
+
+    routed_provinces = {
+        str(
+            message[
+                "province"
+            ]
+        ).strip()
+        for message
+        in routed_messages
+    }
+
+
+    print(
+        "\nCRT routed provinces:"
+    )
+
+
+    if routed_provinces:
+
+        for province in sorted(
+            routed_provinces
+        ):
+
+            print(
+                f" - {province}"
+            )
+
+
+    else:
+
+        print(
+            "No provinces have valid routes."
+        )
+
+
+    # ========================================
+    # SHOW ROUTING INFORMATION
     # ========================================
 
     print(
         "\nCRT Telegram routing:"
     )
+
 
     for message in routed_messages:
 
@@ -542,7 +720,92 @@ def run_crt_purchase_frequency_pipeline() -> None:
 
 
     # ========================================
-    # CREATE CRT TELEGRAM PREVIEW
+    # VERIFY TELEGRAM = EXCEL CUSTOMER COUNT
+    # ========================================
+
+    print(
+        "\nVerifying CRT Telegram "
+        "vs Excel customer counts..."
+    )
+
+
+    telegram_counts = {}
+
+
+    for message in routed_messages:
+
+        province = str(
+            message[
+                "province"
+            ]
+        ).strip()
+
+
+        telegram_counts[
+            province
+        ] = (
+            telegram_counts.get(
+                province,
+                0,
+            )
+            +
+            int(
+                message[
+                    "customer_count"
+                ]
+            )
+        )
+
+
+    for province in sorted(
+        routed_provinces
+    ):
+
+        excel_customer_count = len(
+            alert_customers[
+                alert_customers[
+                    "province"
+                ]
+                == province
+            ]
+        )
+
+
+        telegram_customer_count = (
+            telegram_counts.get(
+                province,
+                0,
+            )
+        )
+
+
+        print(
+            f"{province}: "
+            f"Telegram="
+            f"{telegram_customer_count:,} "
+            f"| Excel="
+            f"{excel_customer_count:,}"
+        )
+
+
+        if (
+            excel_customer_count
+            != telegram_customer_count
+        ):
+
+            raise ValueError(
+                "\nCRT Telegram / Excel "
+                "customer count mismatch!\n"
+                f"Province: {province}\n"
+                f"Telegram: "
+                f"{telegram_customer_count}\n"
+                f"Excel: "
+                f"{excel_customer_count}"
+            )
+
+
+    # ========================================
+    # CREATE TELEGRAM TXT PREVIEW
     # ========================================
 
     preview_output_path = (
@@ -566,6 +829,7 @@ def run_crt_purchase_frequency_pipeline() -> None:
             for message
             in routed_messages
         )
+
 
     else:
 
@@ -591,30 +855,165 @@ def run_crt_purchase_frequency_pipeline() -> None:
 
 
     # ========================================
+    # CREATE PROVINCE EXCEL PREVIEW DIRECTORY
+    # ========================================
+
+    excel_preview_directory = (
+        OUTPUT_DIRECTORY
+        / "province_excel_preview"
+    )
+
+
+    print(
+        "\nCreating CRT province "
+        "Excel previews..."
+    )
+
+
+    # ========================================
+    # GENERATE PROVINCE EXCEL FILES
+    # ========================================
+
+    created_excel_files = (
+        export_province_alert_excels(
+            alert_customers=(
+                alert_customers
+            ),
+            today_tracking=(
+                today_tracking
+            ),
+            product="CRT",
+            output_directory=(
+                excel_preview_directory
+            ),
+            included_provinces=(
+                routed_provinces
+            ),
+        )
+    )
+
+
+    # ========================================
+    # PRINT EXCEL RESULTS
+    # ========================================
+
+    print(
+        "\nCRT province Excel previews:"
+    )
+
+
+    if created_excel_files:
+
+        for province, file_path in (
+            created_excel_files.items()
+        ):
+
+            customer_count = len(
+                alert_customers[
+                    alert_customers[
+                        "province"
+                    ]
+                    == province
+                ]
+            )
+
+
+            print(
+                f"\n{province}: "
+                f"{customer_count:,} customers"
+            )
+
+
+            print(
+                f"  {file_path}"
+            )
+
+
+    else:
+
+        print(
+            "No CRT province Excel "
+            "files were created."
+        )
+
+
+    # ========================================
+    # FINAL EXCEL SUMMARY
+    # ========================================
+
+    print(
+        "\nTotal CRT province Excel files: "
+        f"{len(created_excel_files):,}"
+    )
+
+
+    print(
+        "Excel preview folder:"
+    )
+
+
+    print(
+        excel_preview_directory
+    )
+
+
+    # ========================================
     # TEST MODE
     # ========================================
 
     if not SEND_TELEGRAM:
 
         print(
-            "\nCRT Telegram sending is disabled."
+            "\n"
+            + "=" * 60
         )
 
+
         print(
-            "Review:"
+            "CRT PREVIEW MODE"
         )
+
+
+        print(
+            "=" * 60
+        )
+
+
+        print(
+            "\nTelegram sending is disabled."
+        )
+
+
+        print(
+            "\nReview Telegram preview:"
+        )
+
 
         print(
             preview_output_path
         )
 
+
         print(
-            "\nWhen ready, change:"
+            "\nReview province Excel files:"
         )
+
+
+        print(
+            excel_preview_directory
+        )
+
+
+        print(
+            "\nWhen everything is correct, "
+            "change:"
+        )
+
 
         print(
             "SEND_TELEGRAM = True"
         )
+
 
         return
 
@@ -634,31 +1033,82 @@ def run_crt_purchase_frequency_pipeline() -> None:
 
 
     # ========================================
-    # SEND CRT TELEGRAM ALERTS
+    # SEND REAL TELEGRAM ALERTS
     # ========================================
 
     print(
-        "\nSending real CRT Telegram alerts..."
+        "\nSending real CRT "
+        "Telegram alerts..."
     )
 
 
-    sent_messages = (
-        send_province_alert_messages(
-            messages=routed_messages,
+    sent_results = (
+        send_province_alert_packages(
+            messages=(
+                routed_messages
+            ),
+            excel_files=(
+                created_excel_files
+            ),
+            product="CRT",
         )
     )
 
 
     # ========================================
-    # COMPLETE
+    # COMPLETED
     # ========================================
 
     print(
-        "\nCRT Telegram alert "
-        "process completed."
+        "\n"
+        + "=" * 60
     )
 
+
     print(
-        "CRT messages sent successfully: "
-        f"{len(sent_messages):,}"
+        "CRT TELEGRAM SENDING COMPLETED"
     )
+
+
+    print(
+        "=" * 60
+    )
+
+
+    message_count = sum(
+        1
+        for result
+        in sent_results
+        if result["type"]
+        == "message"
+    )
+
+
+    excel_count = sum(
+        1
+        for result
+        in sent_results
+        if result["type"]
+        == "excel"
+    )
+
+
+    print(
+        "\nCRT alert messages sent: "
+        f"{message_count:,}"
+    )
+
+
+    print(
+        "CRT Excel files sent: "
+        f"{excel_count:,}"
+    )
+
+
+# ============================================
+# DIRECT RUN
+# ============================================
+
+if __name__ == "__main__":
+
+    run_crt_purchase_frequency_pipeline()
