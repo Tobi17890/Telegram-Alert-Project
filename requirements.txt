@@ -3,3 +3,5 @@ pandas
 python-dotenv
 requests
 openpyxl
+google-api-python-client
+google-auth

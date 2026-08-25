@@ -33,6 +33,13 @@ from src.tracking.alert_history import (
     update_daily_alert_history,
 )
 
+from src.tracking.google_sheets_tracking import (
+    REASON_REMINDER_DAYS,
+    apply_reason_reminder_policy,
+    build_tracking_dataset,
+    sync_tracking_dataset,
+)
+
 from src.reports.province_alert_excel import (
     export_province_alert_excels,
 )
@@ -75,7 +82,11 @@ EXPORT_GAP_DETAIL = False
 
 # IMPORTANT:
 # Keep False while checking Excel previews.
-SEND_TELEGRAM = True
+SEND_TELEGRAM = False
+
+
+# Write to Google Sheets only after preview validation.
+WRITE_GOOGLE_SHEETS = True
 
 
 # Same alert rule as CRT.
@@ -320,8 +331,7 @@ def tpp_run_purchase_frequency_pipeline() -> None:
 
 
     print(
-        "\nTPP customers qualifying "
-        "for today's alert: "
+        "\nTPP business-rule alert candidates: "
         f"{len(alert_customers):,}"
     )
 
@@ -521,6 +531,98 @@ def tpp_run_purchase_frequency_pipeline() -> None:
 
 
     # ========================================
+    # APPLY ONLINE REASON / 12-DAY REMINDER
+    # ========================================
+    # This is a post-qualification tracking rule only.
+    # Existing TPP business rules remain unchanged.
+
+    if WRITE_GOOGLE_SHEETS:
+
+        follow_up_region_map = {}
+
+        follow_up_provinces = set(
+            alert_customers["province"]
+            .astype("string")
+            .str.strip()
+            .dropna()
+            .tolist()
+        )
+
+        if "province" in today_tracking.columns:
+            follow_up_provinces.update(
+                today_tracking["province"]
+                .astype("string")
+                .str.strip()
+                .dropna()
+                .tolist()
+            )
+
+        for province in sorted(
+            follow_up_provinces
+        ):
+            province_name = str(province).strip()
+            try:
+                route = get_telegram_route(
+                    product="TPP",
+                    province=province_name,
+                )
+            except KeyError:
+                continue
+
+            follow_up_region_map[province_name] = str(
+                route["region"]
+            ).strip()
+
+        alert_customers, reminder_summary = (
+            apply_reason_reminder_policy(
+                alert_customers=alert_customers,
+                today_tracking=today_tracking,
+                product="TPP",
+                province_regions=follow_up_region_map,
+                reminder_days=REASON_REMINDER_DAYS,
+            )
+        )
+
+        print(
+            "\nTPP 12-day follow-up policy:"
+        )
+        print(
+            "Business-rule candidates: "
+            f"{reminder_summary['business_candidates']:,}"
+        )
+        print(
+            "Action Taken suppressed: "
+            f"{reminder_summary['action_taken_suppressed']:,}"
+        )
+        print(
+            "Reason waiting (< 12 days): "
+            f"{reminder_summary['reason_wait_suppressed']:,}"
+        )
+        print(
+            "Initial alerts: "
+            f"{reminder_summary['initial_alerts']:,}"
+        )
+        print(
+            "Unanswered alerts re-shown: "
+            f"{reminder_summary['unanswered_realerts']:,}"
+        )
+        print(
+            "12-day reminders: "
+            f"{reminder_summary['12_day_reminders']:,}"
+        )
+        print(
+            "Final Telegram customers: "
+            f"{reminder_summary['final_alerts']:,}"
+        )
+
+    else:
+        print(
+            "\nWRITE_GOOGLE_SHEETS = False - "
+            "Reason reminder policy was not applied."
+        )
+
+
+    # ========================================
     # CURRENT ALERT STATISTICS
     # ========================================
 
@@ -573,7 +675,7 @@ def tpp_run_purchase_frequency_pipeline() -> None:
     telegram_messages = (
         build_province_alert_messages(
             customer_summary=(
-                customer_summary
+                alert_customers
             ),
             max_rows_per_message=(
                 MAX_ROWS_PER_MESSAGE
@@ -855,6 +957,125 @@ def tpp_run_purchase_frequency_pipeline() -> None:
 
 
     # ========================================
+    # BUILD GOOGLE SHEETS TRACKING DATASET
+    # ========================================
+    # Uses the SAME routed alert_customers population.
+    # No CRT/TPP business rule is repeated here.
+
+    province_regions = {}
+
+    for message in routed_messages:
+        province = str(message["province"]).strip()
+        region = str(message["region"]).strip()
+
+        existing_region = province_regions.get(province)
+        if existing_region is not None and existing_region != region:
+            raise ValueError(
+                f"TPP province {province} routed to multiple regions: "
+                f"{existing_region} / {region}"
+            )
+
+        province_regions[province] = region
+
+    google_tracking_dataset = build_tracking_dataset(
+        alert_customers=alert_customers,
+        today_tracking=today_tracking,
+        product="TPP",
+        province_regions=province_regions,
+        included_provinces=routed_provinces,
+    )
+
+    google_tracking_preview_path = (
+        OUTPUT_DIRECTORY
+        / "tpp_google_sheets_tracking_preview.csv"
+    )
+
+    google_tracking_dataset.to_csv(
+        google_tracking_preview_path,
+        index=False,
+        encoding="utf-8-sig",
+    )
+
+    print(
+        "\nTPP Google Sheets tracking preview created:"
+    )
+    print(google_tracking_preview_path)
+
+    # ========================================
+    # VERIFY TELEGRAM = GOOGLE TRACKER
+    # ========================================
+
+    print(
+        "\nVerifying TPP Telegram vs Google tracking customer counts..."
+    )
+
+    for province in sorted(routed_provinces):
+        telegram_customer_count = telegram_counts.get(province, 0)
+        tracking_customer_count = len(
+            google_tracking_dataset[
+                google_tracking_dataset["Province"] == province
+            ]
+        )
+
+        print(
+            f"{province}: Telegram={telegram_customer_count:,} "
+            f"| Google Tracker={tracking_customer_count:,}"
+        )
+
+        if telegram_customer_count != tracking_customer_count:
+            raise ValueError(
+                f"TPP Telegram / Google tracking count mismatch for "
+                f"{province}: Telegram={telegram_customer_count}, "
+                f"Google={tracking_customer_count}"
+            )
+
+    # ========================================
+    # OPTIONAL REAL GOOGLE SHEETS SYNC
+    # ========================================
+
+    follow_up_links = {}
+
+    if WRITE_GOOGLE_SHEETS:
+        print(
+            "\nWriting TPP routed alerts to Google Sheets..."
+        )
+
+        follow_up_links = sync_tracking_dataset(
+            tracking_dataset=google_tracking_dataset,
+        )
+
+        missing_links = sorted(
+            routed_provinces - set(follow_up_links)
+        )
+
+        if missing_links:
+            if SEND_TELEGRAM:
+                raise ValueError(
+                    "Telegram sending cancelled because some provinces do not "
+                    "have a configured regional Google follow-up workbook: "
+                    + ", ".join(missing_links)
+                )
+
+            print(
+                "\nRegional Google follow-up is not configured yet for: "
+                + ", ".join(missing_links)
+            )
+            print(
+                "This is allowed while SEND_TELEGRAM = False. "
+                "Only configured regions were written."
+            )
+
+        print("\nTPP online follow-up links:")
+        for province in sorted(follow_up_links):
+            print(f"{province}: {follow_up_links[province]}")
+
+    else:
+        print(
+            "\nWRITE_GOOGLE_SHEETS = False - Google Sheets was not modified."
+        )
+
+
+    # ========================================
     # CREATE TPP TELEGRAM TXT PREVIEW
     # ========================================
 
@@ -1048,6 +1269,15 @@ def tpp_run_purchase_frequency_pipeline() -> None:
 
 
         print(
+            "\nReview Google Sheets tracking preview:"
+        )
+
+        print(
+            google_tracking_preview_path
+        )
+
+
+        print(
             "\nReview province Excel files:"
         )
 
@@ -1087,6 +1317,17 @@ def tpp_run_purchase_frequency_pipeline() -> None:
 
 
     # ========================================
+    # ONLINE TRACKER REQUIRED FOR REAL SEND
+    # ========================================
+
+    if not WRITE_GOOGLE_SHEETS:
+        raise RuntimeError(
+            "TPP Telegram sending requires WRITE_GOOGLE_SHEETS = True "
+            "so every province receives one online follow-up link."
+        )
+
+
+    # ========================================
     # SEND REAL TPP TELEGRAM ALERTS
     # ========================================
 
@@ -1101,8 +1342,8 @@ def tpp_run_purchase_frequency_pipeline() -> None:
             messages=(
                 routed_messages
             ),
-            excel_files=(
-                created_excel_files
+            follow_up_links=(
+                follow_up_links
             ),
             product="TPP",
         )
@@ -1138,12 +1379,12 @@ def tpp_run_purchase_frequency_pipeline() -> None:
     )
 
 
-    excel_count = sum(
+    follow_up_link_count = sum(
         1
         for result
         in sent_results
         if result["type"]
-        == "excel"
+        == "follow_up_link"
     )
 
 
@@ -1154,8 +1395,8 @@ def tpp_run_purchase_frequency_pipeline() -> None:
 
 
     print(
-        "TPP Excel files sent: "
-        f"{excel_count:,}"
+        "TPP online follow-up links sent: "
+        f"{follow_up_link_count:,}"
     )
 
 

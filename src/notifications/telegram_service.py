@@ -1,6 +1,7 @@
-"""Send customer alerts and Excel follow-up files using personal Telegram account."""
+"""Send customer alerts and online follow-up links using personal Telegram account."""
 
 import asyncio
+from html import escape
 from pathlib import Path
 
 from telethon import TelegramClient
@@ -283,85 +284,38 @@ def _group_messages_by_province(
 
 
 # ============================================
-# VALIDATE EXCEL FILES BEFORE SENDING
+# VALIDATE ONLINE FOLLOW-UP LINKS
 # ============================================
 
-def _validate_excel_files(
+def _validate_follow_up_links(
     grouped_messages: dict,
-    excel_files: dict[
-        str,
-        Path,
-    ],
+    follow_up_links: dict[str, str],
 ) -> None:
-    """
-    Verify every province with Telegram alerts
-    also has an Excel file.
+    """Verify every routed province has one usable online link."""
 
-    This happens BEFORE anything is sent.
-    """
-
-    missing_files = []
-
+    missing_links = []
 
     for province in grouped_messages:
+        follow_up_url = str(
+            follow_up_links.get(province, "")
+        ).strip()
 
-        if province not in excel_files:
-
-            missing_files.append(
-                (
-                    province,
-                    "No Excel path found",
-                )
-            )
-
+        if not follow_up_url:
+            missing_links.append(province)
             continue
 
-
-        file_path = Path(
-            excel_files[
-                province
-            ]
-        )
-
-
-        if not file_path.exists():
-
-            missing_files.append(
-                (
-                    province,
-                    str(
-                        file_path
-                    ),
-                )
+        if not (
+            follow_up_url.startswith("https://")
+            or follow_up_url.startswith("http://")
+        ):
+            raise ValueError(
+                f"Invalid follow-up URL for {province}:\n{follow_up_url}"
             )
 
-
-    if missing_files:
-
-        lines = [
-            "Telegram sending cancelled.",
-            "",
-            (
-                "The following province "
-                "Excel files are missing:"
-            ),
-        ]
-
-
-        for (
-            province,
-            problem,
-        ) in missing_files:
-
-            lines.append(
-                f"- {province}: {problem}"
-            )
-
-
-        raise FileNotFoundError(
-            "\n".join(
-                lines
-            )
+    if missing_links:
+        raise ValueError(
+            "Telegram sending cancelled. Missing online follow-up link for: "
+            + ", ".join(sorted(missing_links))
         )
 
 
@@ -376,9 +330,9 @@ async def _send_all_province_packages(
             object,
         ]
     ],
-    excel_files: dict[
+    follow_up_links: dict[
         str,
-        Path,
+        str,
     ],
     product: str,
 ) -> list[
@@ -394,7 +348,7 @@ async def _send_all_province_packages(
 
     1. Send all Active message parts.
     2. Send all Inactive message parts.
-    3. Send ONE matching Excel file.
+    3. Send ONE matching online follow-up link.
     """
 
     product = str(
@@ -424,12 +378,12 @@ async def _send_all_province_packages(
     #
     # ========================================
 
-    _validate_excel_files(
+    _validate_follow_up_links(
         grouped_messages=(
             grouped_messages
         ),
-        excel_files=(
-            excel_files
+        follow_up_links=(
+            follow_up_links
         ),
     )
 
@@ -702,94 +656,64 @@ async def _send_all_province_packages(
 
 
             # =================================
-            # SEND ONE EXCEL FILE
+            # SEND ONE ONLINE FOLLOW-UP LINK
             # =================================
 
-            excel_file_path = Path(
-                excel_files[
+            follow_up_url = str(
+                follow_up_links[
                     province
                 ]
+            ).strip()
+
+            follow_up_html = (
+                f"<b>{escape(product)} Customer Alert Follow-up</b>\n"
+                f"Province: {escape(province)}\n\n"
+                f'<a href="{escape(follow_up_url, quote=True)}">'
+                "Open online follow-up tracker</a>\n\n"
+                "Please fill in the <b>Reason</b> column online."
             )
-
-
-            caption = (
-                f"{product} Customer Alert Follow-up\n"
-                f"Province: {province}\n\n"
-                "Please review the alerted customers, "
-                "fill in the Reason column, "
-                "and send the completed file back."
-            )
-
 
             print(
                 "\n----------------------------------------"
             )
 
             print(
-                "Sending province Excel file..."
+                "Sending province online follow-up link..."
             )
 
-            print(
-                excel_file_path.name
-            )
-
-
-            file_message_id = (
-                await send_telegram_excel_file(
+            link_message_id = (
+                await send_telegram_message(
                     client=client,
                     chat_id=chat_id,
                     message_thread_id=(
                         message_thread_id
                     ),
-                    excel_file_path=(
-                        excel_file_path
-                    ),
-                    caption=(
-                        caption
+                    telegram_html=(
+                        follow_up_html
                     ),
                 )
             )
 
-
             sent_results.append(
                 {
-                    "type": (
-                        "excel"
-                    ),
-                    "product": (
-                        product
-                    ),
-                    "region": (
-                        region
-                    ),
-                    "province": (
-                        province
-                    ),
-                    "chat_id": (
-                        chat_id
-                    ),
-                    "message_thread_id": (
-                        message_thread_id
-                    ),
-                    "message_id": (
-                        file_message_id
-                    ),
-                    "file_path": (
-                        str(
-                            excel_file_path
-                        )
-                    ),
+                    "type": "follow_up_link",
+                    "product": product,
+                    "region": region,
+                    "province": province,
+                    "chat_id": chat_id,
+                    "message_thread_id": message_thread_id,
+                    "message_id": link_message_id,
+                    "follow_up_url": follow_up_url,
                 }
             )
 
-
             print(
-                "Excel file sent successfully."
+                "Online follow-up link sent successfully."
             )
 
             print(
-                "Telegram File Message ID: "
-                f"{file_message_id}"
+                "Telegram Link Message ID: "
+                f"{link_message_id}"
             )
 
 
@@ -831,14 +755,14 @@ async def _send_all_province_packages(
     )
 
 
-    excel_count = sum(
+    follow_up_link_count = sum(
         1
         for result
         in sent_results
         if result[
             "type"
         ]
-        == "excel"
+        == "follow_up_link"
     )
 
 
@@ -861,8 +785,8 @@ async def _send_all_province_packages(
     )
 
     print(
-        "Excel files sent: "
-        f"{excel_count:,}"
+        "Online follow-up links sent: "
+        f"{follow_up_link_count:,}"
     )
 
 
@@ -880,9 +804,9 @@ def send_province_alert_packages(
             object,
         ]
     ],
-    excel_files: dict[
+    follow_up_links: dict[
         str,
-        Path,
+        str,
     ],
     product: str,
 ) -> list[
@@ -892,7 +816,7 @@ def send_province_alert_packages(
     ]
 ]:
     """
-    Send alert messages plus ONE Excel file
+    Send alert messages plus ONE online follow-up link
     for every province.
     """
 
@@ -909,7 +833,7 @@ def send_province_alert_packages(
     return asyncio.run(
         _send_all_province_packages(
             messages=messages,
-            excel_files=excel_files,
+            follow_up_links=follow_up_links,
             product=product,
         )
     )

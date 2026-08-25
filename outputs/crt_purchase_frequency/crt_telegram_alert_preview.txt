@@ -1,6 +1,6 @@
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: Banteay Meanchey
 Alert Rule: Probability >= 60%
 
@@ -8,26 +8,22 @@ Customer Info - Due / Active
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12001496 │ CHE MEY        │ 18d-ago  │ BiWkly  │ Active   │ 84%  │
+│ 11001746 │ MIEN SOKNY     │ 53d-ago  │ Monthly │ Active   │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12001732 │ LAY PHALLY     │ 52d-ago  │ Monthly │ Active   │ 100% │
+│ 12001710 │ DY MAB         │ 48d-ago  │ Monthly │ Active   │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001746 │ MIEN SOKNY     │ 52d-ago  │ Monthly │ Active   │ 100% │
+│ 12003217 │ CHANNA DARA    │ 97d-ago  │ BiMthly │ Active   │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12001710 │ DY MAB         │ 47d-ago  │ Monthly │ Active   │ 100% │
+│ 11001035 │ CHEANG PICH    │ 65d-ago  │ BiMthly │ Active   │ 86%  │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12003217 │ CHANNA DARA    │ 96d-ago  │ BiMthly │ Active   │ 100% │
-├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001035 │ CHEANG PICH    │ 64d-ago  │ BiMthly │ Active   │ 85%  │
-├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001195 │ KIM SEAK       │ 52d-ago  │ BiMthly │ Active   │ 69%  │
+│ 11001195 │ KIM SEAK       │ 53d-ago  │ BiMthly │ Active   │ 70%  │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘
 
 ============================================================
 
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: Banteay Meanchey
 Alert Rule: Probability >= 60%
 Part: 1/2
@@ -36,42 +32,42 @@ Customer Info - Re-engagement
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000392 │ YUOT BUNKONG   │ 923d-ago │ Weekly  │ Inactive │ 100% │
+│ 11000392 │ YUOT BUNKONG   │ 924d-ago │ Weekly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12004929 │ KHEANG MEYMEY  │ 270d-ago │ Weekly  │ Inactive │ 100% │
+│ 12004929 │ KHEANG MEYMEY  │ 271d-ago │ Weekly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11002062 │ THEAB PEP      │ 120d-ago │ Weekly  │ Inactive │ 100% │
+│ 11002062 │ THEAB PEP      │ 121d-ago │ Weekly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11002265 │ YIN TAINGYI    │ 45d-ago  │ Weekly  │ Inactive │ 100% │
+│ 11002265 │ YIN TAINGYI    │ 46d-ago  │ Weekly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12001267 │ YOU MOUY       │ 277d-ago │ BiWkly  │ Inactive │ 100% │
+│ 12001267 │ YOU MOUY       │ 278d-ago │ BiWkly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12002025 │ SAR SOKNAY     │ 209d-ago │ BiWkly  │ Inactive │ 100% │
+│ 12002025 │ SAR SOKNAY     │ 210d-ago │ BiWkly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12000549 │ BUNTHOEUN L... │ 341d-ago │ Monthly │ Inactive │ 100% │
+│ 12000549 │ BUNTHOEUN L... │ 342d-ago │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12001117 │ EIM NET        │ 285d-ago │ Monthly │ Inactive │ 100% │
+│ 12001117 │ EIM NET        │ 286d-ago │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001215 │ HAK SOENG      │ 270d-ago │ Monthly │ Inactive │ 100% │
+│ 11001215 │ HAK SOENG      │ 271d-ago │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12002435 │ HONG MEAN      │ 213d-ago │ Monthly │ Inactive │ 100% │
+│ 12002435 │ HONG MEAN      │ 214d-ago │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12001589 │ VANN BOREY     │ 181d-ago │ Monthly │ Inactive │ 100% │
+│ 12001589 │ VANN BOREY     │ 182d-ago │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12000081 │ HAK HOK        │ 151d-ago │ Monthly │ Inactive │ 100% │
+│ 12000081 │ HAK HOK        │ 152d-ago │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000532 │ CHEANG NETH    │ 111d-ago │ Monthly │ Inactive │ 100% │
+│ 11000532 │ CHEANG NETH    │ 112d-ago │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001768 │ CHEANG CHAN    │ 107d-ago │ Monthly │ Inactive │ 100% │
+│ 11001768 │ CHEANG CHAN    │ 108d-ago │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12001048 │ CHAO CHHOUNG   │ 94d-ago  │ Monthly │ Inactive │ 100% │
+│ 12001048 │ CHAO CHHOUNG   │ 95d-ago  │ Monthly │ Inactive │ 100% │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘
 
 ============================================================
 
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: Banteay Meanchey
 Alert Rule: Probability >= 60%
 Part: 2/2
@@ -80,28 +76,28 @@ Customer Info - Re-engagement
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001024 │ DUL DEN        │ 78d-ago  │ Monthly │ Inactive │ 100% │
+│ 11001024 │ DUL DEN        │ 79d-ago  │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12001642 │ LOR BUNTOEU    │ 62d-ago  │ Monthly │ Inactive │ 100% │
+│ 12001642 │ LOR BUNTOEU    │ 63d-ago  │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001131 │ CHE LEAB       │ 348d-ago │ BiMthly │ Inactive │ 100% │
+│ 11001131 │ CHE LEAB       │ 349d-ago │ BiMthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12003237 │ C K H          │ 201d-ago │ BiMthly │ Inactive │ 100% │
+│ 12003237 │ C K H          │ 202d-ago │ BiMthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001030 │ SOKKHOM SRE... │ 139d-ago │ BiMthly │ Inactive │ 100% │
+│ 11001030 │ SOKKHOM SRE... │ 140d-ago │ BiMthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12001206 │ JOY VAT        │ 137d-ago │ BiMthly │ Inactive │ 100% │
+│ 12001206 │ JOY VAT        │ 138d-ago │ BiMthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001667 │ CHIV SOKUNTHEA │ 120d-ago │ BiMthly │ Inactive │ 100% │
+│ 11001667 │ CHIV SOKUNTHEA │ 121d-ago │ BiMthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12002700 │ SAMNONG PRI... │ 106d-ago │ BiMthly │ Inactive │ 100% │
+│ 12002700 │ SAMNONG PRI... │ 107d-ago │ BiMthly │ Inactive │ 100% │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘
 
 ============================================================
 
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: Battambang
 Alert Rule: Probability >= 60%
 
@@ -109,22 +105,22 @@ Customer Info - Due / Active
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12001199 │ SONG BUN       │ 43d-ago  │ BiWkly  │ Active   │ 100% │
+│ 12001199 │ SONG BUN       │ 44d-ago  │ BiWkly  │ Active   │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001941 │ DOUNG CHANT... │ 18d-ago  │ BiWkly  │ Active   │ 84%  │
+│ 11001941 │ DOUNG CHANT... │ 19d-ago  │ BiWkly  │ Active   │ 88%  │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000046 │ LIM PENG KE... │ 18d-ago  │ BiWkly  │ Active   │ 84%  │
+│ 11000046 │ LIM PENG KE... │ 19d-ago  │ BiWkly  │ Active   │ 88%  │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12000703 │ CHHUONG CHH... │ 35d-ago  │ Monthly │ Active   │ 77%  │
+│ 12000703 │ CHHUONG CHH... │ 36d-ago  │ Monthly │ Active   │ 79%  │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12000861 │ TANG SONGSOUR  │ 49d-ago  │ BiMthly │ Active   │ 65%  │
+│ 12000861 │ TANG SONGSOUR  │ 50d-ago  │ BiMthly │ Active   │ 66%  │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘
 
 ============================================================
 
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: Battambang
 Alert Rule: Probability >= 60%
 
@@ -132,32 +128,32 @@ Customer Info - Re-engagement
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11002221 │ DEPO ST        │ 47d-ago  │ Weekly  │ Inactive │ 100% │
+│ 11002221 │ DEPO ST        │ 48d-ago  │ Weekly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12000908 │ SOMNONG ANGKOR │ 250d-ago │ Monthly │ Inactive │ 100% │
+│ 12000908 │ SOMNONG ANGKOR │ 251d-ago │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12002094 │ CHET BUNNARITH │ 191d-ago │ Monthly │ Inactive │ 100% │
+│ 12002094 │ CHET BUNNARITH │ 192d-ago │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12001599 │ SOPHEAK MON... │ 163d-ago │ Monthly │ Inactive │ 100% │
+│ 12001599 │ SOPHEAK MON... │ 164d-ago │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12000945 │ LENG SENGNA    │ 874d-ago │ BiMthly │ Inactive │ 100% │
+│ 12000945 │ LENG SENGNA    │ 875d-ago │ BiMthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12001079 │ PHAI  PHARY    │ 789d-ago │ BiMthly │ Inactive │ 100% │
+│ 12001079 │ PHAI  PHARY    │ 790d-ago │ BiMthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12005331 │ MORN SEYHA     │ 478d-ago │ BiMthly │ Inactive │ 100% │
+│ 12005331 │ MORN SEYHA     │ 479d-ago │ BiMthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12002021 │ ITH KIMSRON    │ 163d-ago │ BiMthly │ Inactive │ 100% │
+│ 12002021 │ ITH KIMSRON    │ 164d-ago │ BiMthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001519 │ OM CHEN KHMAO  │ 120d-ago │ BiMthly │ Inactive │ 100% │
+│ 11001519 │ OM CHEN KHMAO  │ 121d-ago │ BiMthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12002672 │ RANY THORN     │ 101d-ago │ BiMthly │ Inactive │ 100% │
+│ 12002672 │ RANY THORN     │ 102d-ago │ BiMthly │ Inactive │ 100% │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘
 
 ============================================================
 
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: KEP
 Alert Rule: Probability >= 60%
 
@@ -165,14 +161,14 @@ Customer Info - Re-engagement
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000753 │ CHEN CHOU      │ 798d-ago │ Weekly  │ Inactive │ 100% │
+│ 11000753 │ CHEN CHOU      │ 799d-ago │ Weekly  │ Inactive │ 100% │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘
 
 ============================================================
 
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: Kampong Cham
 Alert Rule: Probability >= 60%
 
@@ -180,14 +176,14 @@ Customer Info - Due / Active
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000049 │ E 101          │ 14d-ago  │ BiWkly  │ Active   │ 65%  │
+│ 11000049 │ E 101          │ 15d-ago  │ BiWkly  │ Active   │ 70%  │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘
 
 ============================================================
 
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: Kampong Cham
 Alert Rule: Probability >= 60%
 
@@ -195,24 +191,24 @@ Customer Info - Re-engagement
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000278 │ MENG LY        │ 812d-ago │ Weekly  │ Inactive │ 100% │
+│ 11000278 │ MENG LY        │ 813d-ago │ Weekly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12004737 │ SENG PAO       │ 311d-ago │ Weekly  │ Inactive │ 100% │
+│ 12004737 │ SENG PAO       │ 312d-ago │ Weekly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001575 │ HOK KEMCHHORN  │ 221d-ago │ Monthly │ Inactive │ 100% │
+│ 11001575 │ HOK KEMCHHORN  │ 222d-ago │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000471 │ ENG KHUNG      │ 208d-ago │ Monthly │ Inactive │ 100% │
+│ 11000471 │ ENG KHUNG      │ 209d-ago │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12001091 │ SEANG POV      │ 228d-ago │ BiMthly │ Inactive │ 100% │
+│ 12001091 │ SEANG POV      │ 229d-ago │ BiMthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000309 │ HENG SOKLY     │ 212d-ago │ BiMthly │ Inactive │ 100% │
+│ 11000309 │ HENG SOKLY     │ 213d-ago │ BiMthly │ Inactive │ 100% │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘
 
 ============================================================
 
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: Kampong Chhnang
 Alert Rule: Probability >= 60%
 
@@ -220,14 +216,14 @@ Customer Info - Due / Active
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001416 │ CHHUN CHANA... │ 56d-ago  │ Monthly │ Active   │ 100% │
+│ 11001416 │ CHHUN CHANA... │ 57d-ago  │ Monthly │ Active   │ 100% │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘
 
 ============================================================
 
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: Kampong Chhnang
 Alert Rule: Probability >= 60%
 
@@ -235,18 +231,14 @@ Customer Info - Re-engagement
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12001449 │ OUNG SOPHAL    │ 210d-ago │ Monthly │ Inactive │ 100% │
-├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000268 │ VATANAK        │ 358d-ago │ BiMthly │ Inactive │ 100% │
-├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000084 │ PICH SOLIDA    │ 248d-ago │ BiMthly │ Inactive │ 100% │
+│ 11000268 │ VATANAK        │ 359d-ago │ BiMthly │ Inactive │ 100% │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘
 
 ============================================================
 
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: Kampong Speu
 Alert Rule: Probability >= 60%
 
@@ -254,36 +246,36 @@ Customer Info - Due / Active
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12005171 │ HEA VITOU      │ 16d-ago  │ Weekly  │ Active   │ 100% │
+│ 12005171 │ HEA VITOU      │ 17d-ago  │ Weekly  │ Active   │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000638 │ KHUT VANDY     │ 7d-ago   │ Weekly  │ Active   │ 67%  │
+│ 11000638 │ KHUT VANDY     │ 8d-ago   │ Weekly  │ Active   │ 76%  │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11002050 │ MAO PHALIN     │ 27d-ago  │ BiWkly  │ Active   │ 100% │
+│ 11002050 │ MAO PHALIN     │ 28d-ago  │ BiWkly  │ Active   │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000165 │ LIM CHHENG ... │ 16d-ago  │ BiWkly  │ Active   │ 74%  │
+│ 11000165 │ LIM CHHENG ... │ 17d-ago  │ BiWkly  │ Active   │ 79%  │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001618 │ SREY MOM       │ 58d-ago  │ Monthly │ Active   │ 100% │
+│ 11001618 │ SREY MOM       │ 59d-ago  │ Monthly │ Active   │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000604 │ BUNLY  SREY... │ 52d-ago  │ Monthly │ Active   │ 100% │
+│ 11000604 │ BUNLY  SREY... │ 53d-ago  │ Monthly │ Active   │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001142 │ HUY SEAKPHY    │ 48d-ago  │ Monthly │ Active   │ 100% │
+│ 11001142 │ HUY SEAKPHY    │ 49d-ago  │ Monthly │ Active   │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000352 │ PHEAK SREYT... │ 48d-ago  │ Monthly │ Active   │ 100% │
+│ 11000352 │ PHEAK SREYT... │ 49d-ago  │ Monthly │ Active   │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12002657 │ TRY CHHORNG    │ 46d-ago  │ Monthly │ Active   │ 100% │
+│ 12002657 │ TRY CHHORNG    │ 47d-ago  │ Monthly │ Active   │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000001 │ KONG SOCHEAT   │ 42d-ago  │ Monthly │ Active   │ 92%  │
+│ 11000001 │ KONG SOCHEAT   │ 43d-ago  │ Monthly │ Active   │ 95%  │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000145 │ KORN SOTHEA    │ 70d-ago  │ BiMthly │ Active   │ 93%  │
+│ 11000145 │ KORN SOTHEA    │ 71d-ago  │ BiMthly │ Active   │ 94%  │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001203 │ CHANNY SOKHEN  │ 46d-ago  │ BiMthly │ Active   │ 61%  │
+│ 11001203 │ CHANNY SOKHEN  │ 47d-ago  │ BiMthly │ Active   │ 62%  │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘
 
 ============================================================
 
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: Kampong Speu
 Alert Rule: Probability >= 60%
 Part: 1/2
@@ -292,42 +284,42 @@ Customer Info - Re-engagement
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000716 │ RAVY CHAE LUON │ 747d-ago │ Weekly  │ Inactive │ 100% │
+│ 11000716 │ RAVY CHAE LUON │ 748d-ago │ Weekly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12003213 │ THEARA SEAV... │ 341d-ago │ Weekly  │ Inactive │ 100% │
+│ 12003213 │ THEARA SEAV... │ 342d-ago │ Weekly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000231 │ E CHEAT        │ 251d-ago │ Weekly  │ Inactive │ 100% │
+│ 11000231 │ E CHEAT        │ 252d-ago │ Weekly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12000062 │ DIN CHHENG     │ 209d-ago │ Weekly  │ Inactive │ 100% │
+│ 12000062 │ DIN CHHENG     │ 210d-ago │ Weekly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12000778 │ KIM SOUR       │ 45d-ago  │ Weekly  │ Inactive │ 100% │
+│ 12000778 │ KIM SOUR       │ 46d-ago  │ Weekly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12002551 │ KONG SEAR      │ 510d-ago │ BiWkly  │ Inactive │ 100% │
+│ 12002551 │ KONG SEAR      │ 511d-ago │ BiWkly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001125 │ SORN SOPHEA... │ 287d-ago │ BiWkly  │ Inactive │ 100% │
+│ 11001125 │ SORN SOPHEA... │ 288d-ago │ BiWkly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12002646 │ KYS            │ 191d-ago │ BiWkly  │ Inactive │ 100% │
+│ 12002646 │ KYS            │ 192d-ago │ BiWkly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000335 │ NGET SEAKLENG  │ 63d-ago  │ BiWkly  │ Inactive │ 100% │
+│ 11000335 │ NGET SEAKLENG  │ 64d-ago  │ BiWkly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001189 │ SONG SOPHOAN   │ 166d-ago │ Monthly │ Inactive │ 100% │
+│ 11001189 │ SONG SOPHOAN   │ 167d-ago │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12002835 │ UDOM RATANA... │ 154d-ago │ Monthly │ Inactive │ 100% │
+│ 12002835 │ UDOM RATANA... │ 155d-ago │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001947 │ LAY PHALLA ... │ 110d-ago │ Monthly │ Inactive │ 100% │
+│ 11001947 │ LAY PHALLA ... │ 111d-ago │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001563 │ SREAN HONGJING │ 80d-ago  │ Monthly │ Inactive │ 100% │
+│ 11001563 │ SREAN HONGJING │ 81d-ago  │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000571 │ SREY HORN      │ 70d-ago  │ Monthly │ Inactive │ 100% │
+│ 11000571 │ SREY HORN      │ 71d-ago  │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001173 │ CHEA MOUYKIM   │ 329d-ago │ BiMthly │ Inactive │ 100% │
+│ 11001173 │ CHEA MOUYKIM   │ 330d-ago │ BiMthly │ Inactive │ 100% │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘
 
 ============================================================
 
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: Kampong Speu
 Alert Rule: Probability >= 60%
 Part: 2/2
@@ -336,22 +328,22 @@ Customer Info - Re-engagement
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000649 │ SEM KIMCHHORNG │ 289d-ago │ BiMthly │ Inactive │ 100% │
+│ 11000649 │ SEM KIMCHHORNG │ 290d-ago │ BiMthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12002303 │ LIM LEANGHENG  │ 244d-ago │ BiMthly │ Inactive │ 100% │
+│ 12002303 │ LIM LEANGHENG  │ 245d-ago │ BiMthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000336 │ PHA SOPHEAP    │ 172d-ago │ BiMthly │ Inactive │ 100% │
+│ 11000336 │ PHA SOPHEAP    │ 173d-ago │ BiMthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000414 │ SUN HEANG      │ 166d-ago │ BiMthly │ Inactive │ 100% │
+│ 11000414 │ SUN HEANG      │ 167d-ago │ BiMthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000663 │ SAMNANG SAM... │ 110d-ago │ BiMthly │ Inactive │ 100% │
+│ 11000663 │ SAMNANG SAM... │ 111d-ago │ BiMthly │ Inactive │ 100% │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘
 
 ============================================================
 
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: Kampong Thom
 Alert Rule: Probability >= 60%
 
@@ -359,14 +351,14 @@ Customer Info - Due / Active
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000281 │ ABP            │ 31d-ago  │ Monthly │ Active   │ 68%  │
+│ 11000281 │ ABP            │ 32d-ago  │ Monthly │ Active   │ 70%  │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘
 
 ============================================================
 
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: Kampong Thom
 Alert Rule: Probability >= 60%
 
@@ -374,18 +366,18 @@ Customer Info - Re-engagement
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000862 │ PRAK CHENDA    │ 672d-ago │ Monthly │ Inactive │ 100% │
+│ 11000862 │ PRAK CHENDA    │ 673d-ago │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12002016 │ NHEUNG PISITH  │ 279d-ago │ Monthly │ Inactive │ 100% │
+│ 12002016 │ NHEUNG PISITH  │ 280d-ago │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000717 │ CHEAT SOPHY    │ 273d-ago │ BiMthly │ Inactive │ 100% │
+│ 11000717 │ CHEAT SOPHY    │ 274d-ago │ BiMthly │ Inactive │ 100% │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘
 
 ============================================================
 
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: Kampot
 Alert Rule: Probability >= 60%
 
@@ -393,20 +385,16 @@ Customer Info - Due / Active
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12003198 │ SAMBO          │ 16d-ago  │ Weekly  │ Active   │ 100% │
+│ 12003198 │ SAMBO          │ 17d-ago  │ Weekly  │ Active   │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12002567 │ RA CHHEAB      │ 44d-ago  │ BiWkly  │ Active   │ 100% │
-├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001385 │ HOUT CHEA (... │ 13d-ago  │ BiWkly  │ Active   │ 60%  │
-├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12001107 │ SREY POV       │ 60d-ago  │ Monthly │ Active   │ 100% │
+│ 11001385 │ HOUT CHEA (... │ 14d-ago  │ BiWkly  │ Active   │ 65%  │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘
 
 ============================================================
 
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: Kampot
 Alert Rule: Probability >= 60%
 
@@ -414,24 +402,26 @@ Customer Info - Re-engagement
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12000896 │ SEREY PHEAP    │ 728d-ago │ Weekly  │ Inactive │ 100% │
+│ 12000896 │ SEREY PHEAP    │ 729d-ago │ Weekly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000707 │ VONG DINA      │ 640d-ago │ Weekly  │ Inactive │ 100% │
+│ 11000707 │ VONG DINA      │ 641d-ago │ Weekly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001496 │ RATH CHANTHOU  │ 255d-ago │ BiWkly  │ Inactive │ 100% │
+│ 11001496 │ RATH CHANTHOU  │ 256d-ago │ BiWkly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001627 │ SUN HEAN       │ 222d-ago │ BiWkly  │ Inactive │ 100% │
+│ 11001627 │ SUN HEAN       │ 223d-ago │ BiWkly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000562 │ U SAN          │ 842d-ago │ Monthly │ Inactive │ 100% │
+│ 11000562 │ U SAN          │ 843d-ago │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001428 │ PHEAV POUT     │ 178d-ago │ Monthly │ Inactive │ 100% │
+│ 11001428 │ PHEAV POUT     │ 179d-ago │ Monthly │ Inactive │ 100% │
+├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
+│ 12001107 │ SREY POV       │ 61d-ago  │ Monthly │ Inactive │ 100% │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘
 
 ============================================================
 
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: Kandal
 Alert Rule: Probability >= 60%
 
@@ -439,20 +429,16 @@ Customer Info - Due / Active
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000101 │ CHRAY SOKUN    │ 11d-ago  │ Weekly  │ Active   │ 100% │
+│ 12002254 │ SAMBO THAVY    │ 15d-ago  │ BiWkly  │ Active   │ 70%  │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12001836 │ DERM MEAN      │ 7d-ago   │ Weekly  │ Active   │ 67%  │
-├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12002254 │ SAMBO THAVY    │ 14d-ago  │ BiWkly  │ Active   │ 65%  │
-├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12002311 │ HOY MAB        │ 46d-ago  │ BiMthly │ Active   │ 61%  │
+│ 12002311 │ HOY MAB        │ 47d-ago  │ BiMthly │ Active   │ 62%  │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘
 
 ============================================================
 
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: Kandal
 Alert Rule: Probability >= 60%
 
@@ -460,22 +446,22 @@ Customer Info - Re-engagement
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000767 │ CSR            │ 798d-ago │ Weekly  │ Inactive │ 100% │
+│ 11000767 │ CSR            │ 799d-ago │ Weekly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000075 │ CHAMREUN SR... │ 360d-ago │ BiWkly  │ Inactive │ 100% │
+│ 11000075 │ CHAMREUN SR... │ 361d-ago │ BiWkly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12002605 │ AN HEANG       │ 168d-ago │ Monthly │ Inactive │ 100% │
+│ 12002605 │ AN HEANG       │ 169d-ago │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000107 │ CARGO TRANS... │ 518d-ago │ BiMthly │ Inactive │ 100% │
+│ 11000107 │ CARGO TRANS... │ 519d-ago │ BiMthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000307 │ CLD TRANSPO... │ 518d-ago │ BiMthly │ Inactive │ 100% │
+│ 11000307 │ CLD TRANSPO... │ 519d-ago │ BiMthly │ Inactive │ 100% │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘
 
 ============================================================
 
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: Koh Kong
 Alert Rule: Probability >= 60%
 
@@ -483,14 +469,14 @@ Customer Info - Due / Active
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12005207 │ LOV KOEMHENG   │ 17d-ago  │ Weekly  │ Active   │ 100% │
+│ 12005207 │ LOV KOEMHENG   │ 18d-ago  │ Weekly  │ Active   │ 100% │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘
 
 ============================================================
 
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: Koh Kong
 Alert Rule: Probability >= 60%
 
@@ -498,22 +484,22 @@ Customer Info - Re-engagement
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001665 │ CHIV TOEK HOR  │ 209d-ago │ Weekly  │ Inactive │ 100% │
+│ 11001665 │ CHIV TOEK HOR  │ 210d-ago │ Weekly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12003194 │ KAO SIV        │ 95d-ago  │ Weekly  │ Inactive │ 100% │
+│ 12003194 │ KAO SIV        │ 96d-ago  │ Weekly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001116 │ HOUSE 99       │ 438d-ago │ Monthly │ Inactive │ 100% │
+│ 11001116 │ HOUSE 99       │ 439d-ago │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12000916 │ CHENG OUV      │ 105d-ago │ Monthly │ Inactive │ 100% │
+│ 12000916 │ CHENG OUV      │ 106d-ago │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12001696 │ CHEA KIMNGOUN  │ 97d-ago  │ Monthly │ Inactive │ 100% │
+│ 12001696 │ CHEA KIMNGOUN  │ 98d-ago  │ Monthly │ Inactive │ 100% │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘
 
 ============================================================
 
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: Kratie
 Alert Rule: Probability >= 60%
 
@@ -521,22 +507,20 @@ Customer Info - Due / Active
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001413 │ HOUT CHEA (... │ 27d-ago  │ BiWkly  │ Active   │ 100% │
+│ 11001782 │ OEUNG BUNSREAN │ 45d-ago  │ Monthly │ Active   │ 99%  │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001782 │ OEUNG BUNSREAN │ 44d-ago  │ Monthly │ Active   │ 97%  │
+│ 11000940 │ LEAK DANNY     │ 42d-ago  │ Monthly │ Active   │ 92%  │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000940 │ LEAK DANNY     │ 41d-ago  │ Monthly │ Active   │ 90%  │
+│ 12002403 │ CHANNA KHIM    │ 84d-ago  │ BiMthly │ Active   │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12002403 │ CHANNA KHIM    │ 83d-ago  │ BiMthly │ Active   │ 100% │
-├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001556 │ CHENG LY       │ 47d-ago  │ BiMthly │ Active   │ 62%  │
+│ 11001556 │ CHENG LY       │ 48d-ago  │ BiMthly │ Active   │ 64%  │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘
 
 ============================================================
 
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: Kratie
 Alert Rule: Probability >= 60%
 
@@ -544,22 +528,22 @@ Customer Info - Re-engagement
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001529 │ E MOUY         │ 242d-ago │ Weekly  │ Inactive │ 100% │
+│ 11001529 │ E MOUY         │ 243d-ago │ Weekly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001615 │ TANG HONGVERNG │ 189d-ago │ Weekly  │ Inactive │ 100% │
+│ 11001615 │ TANG HONGVERNG │ 190d-ago │ Weekly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12002185 │ RA TY          │ 83d-ago  │ Monthly │ Inactive │ 100% │
+│ 12002185 │ RA TY          │ 84d-ago  │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12001721 │ BOV LENGKIM    │ 74d-ago  │ Monthly │ Inactive │ 100% │
+│ 12001721 │ BOV LENGKIM    │ 75d-ago  │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12002212 │ MOM CHANDARA   │ 209d-ago │ BiMthly │ Inactive │ 100% │
+│ 12002212 │ MOM CHANDARA   │ 210d-ago │ BiMthly │ Inactive │ 100% │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘
 
 ============================================================
 
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: Mondol Kiri
 Alert Rule: Probability >= 60%
 
@@ -567,14 +551,14 @@ Customer Info - Due / Active
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12005821 │ RY HEAP        │ 67d-ago  │ BiMthly │ Active   │ 89%  │
+│ 12005821 │ RY HEAP        │ 68d-ago  │ BiMthly │ Active   │ 90%  │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘
 
 ============================================================
 
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: Mondol Kiri
 Alert Rule: Probability >= 60%
 
@@ -582,16 +566,16 @@ Customer Info - Re-engagement
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001435 │ BOTIKA (DY ... │ 312d-ago │ Weekly  │ Inactive │ 100% │
+│ 11001435 │ BOTIKA (DY ... │ 313d-ago │ Weekly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001388 │ CHENG CHANTHA  │ 249d-ago │ BiMthly │ Inactive │ 100% │
+│ 11001388 │ CHENG CHANTHA  │ 250d-ago │ BiMthly │ Inactive │ 100% │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘
 
 ============================================================
 
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: Phnom Penh
 Alert Rule: Probability >= 60%
 
@@ -599,26 +583,22 @@ Customer Info - Due / Active
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000077 │ LY MENGHOK     │ 17d-ago  │ Weekly  │ Active   │ 100% │
+│ 11001433 │ MURA HOME      │ 7d-ago   │ Weekly  │ Active   │ 67%  │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001460 │ THBM           │ 12d-ago  │ Weekly  │ Active   │ 100% │
+│ 12000790 │ LAO KIM NGUON  │ 38d-ago  │ BiWkly  │ Active   │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11002387 │ SOMNONG 71     │ 9d-ago   │ Weekly  │ Active   │ 86%  │
+│ 11000048 │ MAO KIMSEAN    │ 45d-ago  │ Monthly │ Active   │ 99%  │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12000790 │ LAO KIM NGUON  │ 37d-ago  │ BiWkly  │ Active   │ 100% │
+│ 12000900 │ SOK ANG        │ 33d-ago  │ Monthly │ Active   │ 73%  │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000048 │ MAO KIMSEAN    │ 44d-ago  │ Monthly │ Active   │ 97%  │
-├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12000900 │ SOK ANG        │ 32d-ago  │ Monthly │ Active   │ 70%  │
-├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000246 │ MANI TRANSP... │ 48d-ago  │ BiMthly │ Active   │ 64%  │
+│ 11000246 │ MANI TRANSP... │ 49d-ago  │ BiMthly │ Active   │ 65%  │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘
 
 ============================================================
 
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: Phnom Penh
 Alert Rule: Probability >= 60%
 
@@ -626,34 +606,34 @@ Customer Info - Re-engagement
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12001694 │ LY THEARY      │ 532d-ago │ Weekly  │ Inactive │ 100% │
+│ 12001694 │ LY THEARY      │ 533d-ago │ Weekly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001206 │ UNG LENGKOUNG  │ 420d-ago │ Weekly  │ Inactive │ 100% │
+│ 11001206 │ UNG LENGKOUNG  │ 421d-ago │ Weekly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000877 │ SENG LENG I    │ 226d-ago │ Weekly  │ Inactive │ 100% │
+│ 11000877 │ SENG LENG I    │ 227d-ago │ Weekly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001678 │ LENG THONAR... │ 213d-ago │ Weekly  │ Inactive │ 100% │
+│ 11001678 │ LENG THONAR... │ 214d-ago │ Weekly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12001845 │ ANGKOR SAMRETH │ 53d-ago  │ Weekly  │ Inactive │ 100% │
+│ 12001845 │ ANGKOR SAMRETH │ 54d-ago  │ Weekly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000590 │ KSP            │ 35d-ago  │ Weekly  │ Inactive │ 100% │
+│ 11000590 │ KSP            │ 36d-ago  │ Weekly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12001867 │ ATH SINAT      │ 173d-ago │ Monthly │ Inactive │ 100% │
+│ 12001867 │ ATH SINAT      │ 174d-ago │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12002828 │ LONG EI        │ 169d-ago │ Monthly │ Inactive │ 100% │
+│ 12002828 │ LONG EI        │ 170d-ago │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000653 │ LLC            │ 314d-ago │ BiMthly │ Inactive │ 100% │
+│ 11000653 │ LLC            │ 315d-ago │ BiMthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000133 │ SAM KOU AUN    │ 273d-ago │ BiMthly │ Inactive │ 100% │
+│ 11000133 │ SAM KOU AUN    │ 274d-ago │ BiMthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 16000000 │ ONETIME        │ 237d-ago │ BiMthly │ Inactive │ 100% │
+│ 16000000 │ ONETIME        │ 238d-ago │ BiMthly │ Inactive │ 100% │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘
 
 ============================================================
 
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: Preah Vihear
 Alert Rule: Probability >= 60%
 
@@ -661,14 +641,14 @@ Customer Info - Due / Active
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001018 │ SOENG CHANNEA  │ 79d-ago  │ BiMthly │ Active   │ 100% │
+│ 11001018 │ SOENG CHANNEA  │ 80d-ago  │ BiMthly │ Active   │ 100% │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘
 
 ============================================================
 
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: Preah Vihear
 Alert Rule: Probability >= 60%
 
@@ -676,24 +656,24 @@ Customer Info - Re-engagement
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000384 │ OU SOPHEAT     │ 920d-ago │ Monthly │ Inactive │ 100% │
+│ 11000384 │ OU SOPHEAT     │ 921d-ago │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000644 │ OUR SOPHEAK    │ 920d-ago │ Monthly │ Inactive │ 100% │
+│ 11000644 │ OUR SOPHEAK    │ 921d-ago │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001687 │ TRY HOME       │ 100d-ago │ Monthly │ Inactive │ 100% │
+│ 11001687 │ TRY HOME       │ 101d-ago │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000232 │ MEAN PHAL      │ 61d-ago  │ Monthly │ Inactive │ 100% │
+│ 11000232 │ MEAN PHAL      │ 62d-ago  │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001360 │ KHUN SEUNG     │ 290d-ago │ BiMthly │ Inactive │ 100% │
+│ 11001360 │ KHUN SEUNG     │ 291d-ago │ BiMthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000382 │ CHEANG KONG    │ 106d-ago │ BiMthly │ Inactive │ 100% │
+│ 11000382 │ CHEANG KONG    │ 107d-ago │ BiMthly │ Inactive │ 100% │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘
 
 ============================================================
 
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: Prey Veng
 Alert Rule: Probability >= 60%
 
@@ -701,30 +681,28 @@ Customer Info - Due / Active
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12000854 │ NGUON HOUT     │ 16d-ago  │ Weekly  │ Active   │ 100% │
+│ 12000854 │ NGUON HOUT     │ 17d-ago  │ Weekly  │ Active   │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12001019 │ SENG SOVANRITH │ 13d-ago  │ Weekly  │ Active   │ 100% │
+│ 12001019 │ SENG SOVANRITH │ 14d-ago  │ Weekly  │ Active   │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12001007 │ CHEA SONGHY    │ 12d-ago  │ Weekly  │ Active   │ 100% │
+│ 12001007 │ CHEA SONGHY    │ 13d-ago  │ Weekly  │ Active   │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12000756 │ HOUN NOL       │ 12d-ago  │ Weekly  │ Active   │ 100% │
+│ 12000756 │ HOUN NOL       │ 13d-ago  │ Weekly  │ Active   │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000096 │ KHY SOKCHEA... │ 31d-ago  │ BiWkly  │ Active   │ 100% │
+│ 11000096 │ KHY SOKCHEA... │ 32d-ago  │ BiWkly  │ Active   │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12002873 │ TPP            │ 39d-ago  │ Monthly │ Active   │ 86%  │
+│ 12002873 │ TPP            │ 40d-ago  │ Monthly │ Active   │ 88%  │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000776 │ THY LINA       │ 38d-ago  │ Monthly │ Active   │ 84%  │
+│ 11000776 │ THY LINA       │ 39d-ago  │ Monthly │ Active   │ 86%  │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12000766 │ CHAN NHOR      │ 53d-ago  │ BiMthly │ Active   │ 70%  │
-├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12001034 │ LEANG BUNTRY   │ 53d-ago  │ BiMthly │ Active   │ 70%  │
+│ 12000766 │ CHAN NHOR      │ 54d-ago  │ BiMthly │ Active   │ 72%  │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘
 
 ============================================================
 
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: Pursat
 Alert Rule: Probability >= 60%
 
@@ -732,16 +710,16 @@ Customer Info - Due / Active
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12001857 │ MEAN VOLIS     │ 33d-ago  │ Monthly │ Active   │ 73%  │
+│ 12001857 │ MEAN VOLIS     │ 34d-ago  │ Monthly │ Active   │ 75%  │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12002900 │ NGET SOKHENG   │ 53d-ago  │ BiMthly │ Active   │ 70%  │
+│ 12002900 │ NGET SOKHENG   │ 54d-ago  │ BiMthly │ Active   │ 72%  │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘
 
 ============================================================
 
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: Pursat
 Alert Rule: Probability >= 60%
 
@@ -749,42 +727,42 @@ Customer Info - Re-engagement
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12000609 │ HUN RY         │ 606d-ago │ BiWkly  │ Inactive │ 100% │
+│ 12000609 │ HUN RY         │ 607d-ago │ BiWkly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000162 │ LENG HENG      │ 420d-ago │ BiWkly  │ Inactive │ 100% │
+│ 11000162 │ LENG HENG      │ 421d-ago │ BiWkly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12002919 │ SORM SREY MAO  │ 355d-ago │ BiWkly  │ Inactive │ 100% │
+│ 12002919 │ SORM SREY MAO  │ 356d-ago │ BiWkly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000448 │ CHAE THY       │ 179d-ago │ BiWkly  │ Inactive │ 100% │
+│ 11000448 │ CHAE THY       │ 180d-ago │ BiWkly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12002969 │ MENG CHOU      │ 116d-ago │ BiWkly  │ Inactive │ 100% │
+│ 12002969 │ MENG CHOU      │ 117d-ago │ BiWkly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000465 │ CHAE SOK       │ 468d-ago │ Monthly │ Inactive │ 100% │
+│ 11000465 │ CHAE SOK       │ 469d-ago │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12001260 │ LEANG NHAK     │ 378d-ago │ Monthly │ Inactive │ 100% │
+│ 12001260 │ LEANG NHAK     │ 379d-ago │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12001150 │ CHEA SENG      │ 71d-ago  │ Monthly │ Inactive │ 100% │
+│ 12001150 │ CHEA SENG      │ 72d-ago  │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000403 │ TANG CHHAYH... │ 439d-ago │ BiMthly │ Inactive │ 100% │
+│ 11000403 │ TANG CHHAYH... │ 440d-ago │ BiMthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12002124 │ CHHUN KOEMSAN  │ 306d-ago │ BiMthly │ Inactive │ 100% │
+│ 12002124 │ CHHUN KOEMSAN  │ 307d-ago │ BiMthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12001291 │ LEANG HOA      │ 268d-ago │ BiMthly │ Inactive │ 100% │
+│ 12001291 │ LEANG HOA      │ 269d-ago │ BiMthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001337 │ M S            │ 208d-ago │ BiMthly │ Inactive │ 100% │
+│ 11001337 │ M S            │ 209d-ago │ BiMthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000217 │ NOEURM SREY... │ 139d-ago │ BiMthly │ Inactive │ 100% │
+│ 11000217 │ NOEURM SREY... │ 140d-ago │ BiMthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12000992 │ MOM SOUR       │ 123d-ago │ BiMthly │ Inactive │ 100% │
+│ 12000992 │ MOM SOUR       │ 124d-ago │ BiMthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12001671 │ PHON VANNOET   │ 117d-ago │ BiMthly │ Inactive │ 100% │
+│ 12001671 │ PHON VANNOET   │ 118d-ago │ BiMthly │ Inactive │ 100% │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘
 
 ============================================================
 
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: Ratanak Kiri
 Alert Rule: Probability >= 60%
 
@@ -792,18 +770,16 @@ Customer Info - Due / Active
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001101 │ LY MENGKORN    │ 18d-ago  │ BiWkly  │ Active   │ 84%  │
+│ 12001243 │ KIM DY         │ 61d-ago  │ BiMthly │ Active   │ 81%  │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12001243 │ KIM DY         │ 60d-ago  │ BiMthly │ Active   │ 79%  │
-├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12005118 │ CHIVON         │ 53d-ago  │ BiMthly │ Active   │ 70%  │
+│ 12005118 │ CHIVON         │ 54d-ago  │ BiMthly │ Active   │ 72%  │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘
 
 ============================================================
 
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: Ratanak Kiri
 Alert Rule: Probability >= 60%
 
@@ -811,22 +787,22 @@ Customer Info - Re-engagement
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12001303 │ SMAN MATH      │ 266d-ago │ Weekly  │ Inactive │ 100% │
+│ 12001303 │ SMAN MATH      │ 267d-ago │ Weekly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12002708 │ MEY PANHA      │ 857d-ago │ BiWkly  │ Inactive │ 100% │
+│ 12002708 │ MEY PANHA      │ 858d-ago │ BiWkly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001365 │ VANN LYPIN     │ 78d-ago  │ Monthly │ Inactive │ 100% │
+│ 11001365 │ VANN LYPIN     │ 79d-ago  │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12005549 │ RAKSMEY PIP... │ 74d-ago  │ Monthly │ Inactive │ 100% │
+│ 12005549 │ RAKSMEY PIP... │ 75d-ago  │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001095 │ SEN SAMATH     │ 179d-ago │ BiMthly │ Inactive │ 100% │
+│ 11001095 │ SEN SAMATH     │ 180d-ago │ BiMthly │ Inactive │ 100% │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘
 
 ============================================================
 
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: Siem Reap
 Alert Rule: Probability >= 60%
 
@@ -834,30 +810,30 @@ Customer Info - Due / Active
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001648 │ VUTH THIM      │ 59d-ago  │ Monthly │ Active   │ 100% │
+│ 11001648 │ VUTH THIM      │ 60d-ago  │ Monthly │ Active   │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12000835 │ MAO BUNRATH    │ 58d-ago  │ Monthly │ Active   │ 100% │
+│ 12000835 │ MAO BUNRATH    │ 59d-ago  │ Monthly │ Active   │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12001419 │ RADY           │ 37d-ago  │ Monthly │ Active   │ 81%  │
+│ 12001419 │ RADY           │ 38d-ago  │ Monthly │ Active   │ 84%  │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12000956 │ CHHAY CHEK     │ 32d-ago  │ Monthly │ Active   │ 70%  │
+│ 12000956 │ CHHAY CHEK     │ 33d-ago  │ Monthly │ Active   │ 73%  │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000295 │ TIN BUNTY      │ 81d-ago  │ BiMthly │ Active   │ 100% │
+│ 11000295 │ TIN BUNTY      │ 82d-ago  │ BiMthly │ Active   │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12000208 │ PHAN NARY      │ 76d-ago  │ BiMthly │ Active   │ 100% │
+│ 12000208 │ PHAN NARY      │ 77d-ago  │ BiMthly │ Active   │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001034 │ MA KIMSOVANNY  │ 75d-ago  │ BiMthly │ Active   │ 99%  │
+│ 11001034 │ MA KIMSOVANNY  │ 76d-ago  │ BiMthly │ Active   │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12002655 │ MUON SAREUK    │ 58d-ago  │ BiMthly │ Active   │ 77%  │
+│ 12002655 │ MUON SAREUK    │ 59d-ago  │ BiMthly │ Active   │ 78%  │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12002679 │ SIENG SOVANN   │ 55d-ago  │ BiMthly │ Active   │ 73%  │
+│ 12002679 │ SIENG SOVANN   │ 56d-ago  │ BiMthly │ Active   │ 74%  │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘
 
 ============================================================
 
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: Siem Reap
 Alert Rule: Probability >= 60%
 
@@ -865,24 +841,24 @@ Customer Info - Re-engagement
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000668 │ KROU CHONG ... │ 875d-ago │ Monthly │ Inactive │ 100% │
+│ 11000668 │ KROU CHONG ... │ 876d-ago │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12000922 │ TAN KIM SEAK   │ 867d-ago │ Monthly │ Inactive │ 100% │
+│ 12000922 │ TAN KIM SEAK   │ 868d-ago │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001218 │ PUR SEREI K... │ 214d-ago │ Monthly │ Inactive │ 100% │
+│ 11001218 │ PUR SEREI K... │ 215d-ago │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12002224 │ KLHEANG SEAN   │ 163d-ago │ Monthly │ Inactive │ 100% │
+│ 12002224 │ KLHEANG SEAN   │ 164d-ago │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12001228 │ VAI SIKEN      │ 110d-ago │ Monthly │ Inactive │ 100% │
+│ 12001228 │ VAI SIKEN      │ 111d-ago │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12002167 │ MENH EAR CO... │ 124d-ago │ BiMthly │ Inactive │ 100% │
+│ 12002167 │ MENH EAR CO... │ 125d-ago │ BiMthly │ Inactive │ 100% │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘
 
 ============================================================
 
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: Sihanouk Ville
 Alert Rule: Probability >= 60%
 
@@ -890,22 +866,22 @@ Customer Info - Due / Active
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000988 │ HOME           │ 30d-ago  │ BiWkly  │ Active   │ 100% │
+│ 11000988 │ HOME           │ 31d-ago  │ BiWkly  │ Active   │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11002106 │ POV POV        │ 31d-ago  │ Monthly │ Active   │ 68%  │
+│ 11002106 │ POV POV        │ 32d-ago  │ Monthly │ Active   │ 70%  │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12001003 │ ENG POLIVORN   │ 82d-ago  │ BiMthly │ Active   │ 100% │
+│ 12001003 │ ENG POLIVORN   │ 83d-ago  │ BiMthly │ Active   │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001596 │ MEUNG HAM      │ 60d-ago  │ BiMthly │ Active   │ 79%  │
+│ 11001596 │ MEUNG HAM      │ 61d-ago  │ BiMthly │ Active   │ 81%  │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12002080 │ CHOUNG PHALLA  │ 46d-ago  │ BiMthly │ Active   │ 61%  │
+│ 12002080 │ CHOUNG PHALLA  │ 47d-ago  │ BiMthly │ Active   │ 62%  │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘
 
 ============================================================
 
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: Sihanouk Ville
 Alert Rule: Probability >= 60%
 
@@ -913,22 +889,22 @@ Customer Info - Re-engagement
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001998 │ HAI CHANPUN... │ 41d-ago  │ Weekly  │ Inactive │ 100% │
+│ 11001998 │ HAI CHANPUN... │ 42d-ago  │ Weekly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000187 │ E LIM          │ 452d-ago │ BiWkly  │ Inactive │ 100% │
+│ 11000187 │ E LIM          │ 453d-ago │ BiWkly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12002154 │ SRAK THOM      │ 209d-ago │ Monthly │ Inactive │ 100% │
+│ 12002154 │ SRAK THOM      │ 210d-ago │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12001026 │ SREY SROS      │ 82d-ago  │ Monthly │ Inactive │ 100% │
+│ 12001026 │ SREY SROS      │ 83d-ago  │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12002074 │ SOVANN         │ 249d-ago │ BiMthly │ Inactive │ 100% │
+│ 12002074 │ SOVANN         │ 250d-ago │ BiMthly │ Inactive │ 100% │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘
 
 ============================================================
 
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: Strung Treng
 Alert Rule: Probability >= 60%
 
@@ -936,14 +912,14 @@ Customer Info - Due / Active
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12002095 │ SOR SOKSROUY   │ 84d-ago  │ BiMthly │ Active   │ 100% │
+│ 12002095 │ SOR SOKSROUY   │ 85d-ago  │ BiMthly │ Active   │ 100% │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘
 
 ============================================================
 
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: Strung Treng
 Alert Rule: Probability >= 60%
 
@@ -951,16 +927,16 @@ Customer Info - Re-engagement
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001363 │ CHAMKAR DOUNG  │ 308d-ago │ Monthly │ Inactive │ 100% │
+│ 11001363 │ CHAMKAR DOUNG  │ 309d-ago │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12004592 │ LONG SOVANNA   │ 68d-ago  │ Monthly │ Inactive │ 100% │
+│ 12004592 │ LONG SOVANNA   │ 69d-ago  │ Monthly │ Inactive │ 100% │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘
 
 ============================================================
 
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: Svay Rieng
 Alert Rule: Probability >= 60%
 
@@ -968,14 +944,14 @@ Customer Info - Due / Active
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001432 │ PHAL CHANTHY   │ 31d-ago  │ BiWkly  │ Active   │ 100% │
+│ 11001432 │ PHAL CHANTHY   │ 32d-ago  │ BiWkly  │ Active   │ 100% │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘
 
 ============================================================
 
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: Svay Rieng
 Alert Rule: Probability >= 60%
 
@@ -983,18 +959,18 @@ Customer Info - Re-engagement
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12005041 │ JAE YECH       │ 573d-ago │ Monthly │ Inactive │ 100% │
+│ 12005041 │ JAE YECH       │ 574d-ago │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001419 │ PHOL SOPHEAK   │ 146d-ago │ Monthly │ Inactive │ 100% │
+│ 11001419 │ PHOL SOPHEAK   │ 147d-ago │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000998 │ CHE CHANNY     │ 98d-ago  │ Monthly │ Inactive │ 100% │
+│ 11000998 │ CHE CHANNY     │ 99d-ago  │ Monthly │ Inactive │ 100% │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘
 
 ============================================================
 
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: Takeo
 Alert Rule: Probability >= 60%
 
@@ -1002,16 +978,14 @@ Customer Info - Due / Active
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12003188 │ KHEN SOVANN... │ 17d-ago  │ BiWkly  │ Active   │ 79%  │
-├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000006 │ SOK LY         │ 48d-ago  │ BiMthly │ Active   │ 64%  │
+│ 11000006 │ SOK LY         │ 49d-ago  │ BiMthly │ Active   │ 65%  │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘
 
 ============================================================
 
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: Takeo
 Alert Rule: Probability >= 60%
 
@@ -1019,34 +993,30 @@ Customer Info - Re-engagement
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000558 │ JE SOKHA       │ 952d-ago │ Weekly  │ Inactive │ 100% │
+│ 11000558 │ JE SOKHA       │ 953d-ago │ Weekly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12002084 │ SREAN HERO     │ 254d-ago │ BiWkly  │ Inactive │ 100% │
+│ 12002084 │ SREAN HERO     │ 255d-ago │ BiWkly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000575 │ MORL NATH      │ 94d-ago  │ BiWkly  │ Inactive │ 100% │
+│ 11001449 │ STAR HOME      │ 78d-ago  │ BiWkly  │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001449 │ STAR HOME      │ 77d-ago  │ BiWkly  │ Inactive │ 100% │
+│ 12001059 │ SOVAN NIKA     │ 165d-ago │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12001059 │ SOVAN NIKA     │ 164d-ago │ Monthly │ Inactive │ 100% │
+│ 11001061 │ CHOU MAO       │ 83d-ago  │ Monthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000832 │ AM BOTICA      │ 98d-ago  │ Monthly │ Inactive │ 100% │
+│ 11000703 │ YORNG PHALLY   │ 804d-ago │ BiMthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11001061 │ CHOU MAO       │ 82d-ago  │ Monthly │ Inactive │ 100% │
+│ 11000742 │ KHMER APHIVOD  │ 472d-ago │ BiMthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000703 │ YORNG PHALLY   │ 803d-ago │ BiMthly │ Inactive │ 100% │
+│ 12002600 │ SOMA VATEY     │ 468d-ago │ BiMthly │ Inactive │ 100% │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000742 │ KHMER APHIVOD  │ 471d-ago │ BiMthly │ Inactive │ 100% │
-├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12002600 │ SOMA VATEY     │ 467d-ago │ BiMthly │ Inactive │ 100% │
-├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 12001995 │ SEAN SREYMOM   │ 180d-ago │ BiMthly │ Inactive │ 100% │
+│ 12001995 │ SEAN SREYMOM   │ 181d-ago │ BiMthly │ Inactive │ 100% │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘
 
 ============================================================
 
 CMI Depot Purchase Prediction Alert
 
-Date: 24 Aug 2026
+Date: 25 Aug 2026
 Region: Tbong Khmoum
 Alert Rule: Probability >= 60%
 
@@ -1054,5 +1024,5 @@ Customer Info - Due / Active
 ┌──────────┬────────────────┬──────────┬─────────┬──────────┬──────┐
 │ ID       │ Name           │ Last     │ Type    │ Status   │ Prob │
 ├──────────┼────────────────┼──────────┼─────────┼──────────┼──────┤
-│ 11000189 │ LENG TRY       │ 27d-ago  │ BiWkly  │ Active   │ 100% │
+│ 11000189 │ LENG TRY       │ 28d-ago  │ BiWkly  │ Active   │ 100% │
 └──────────┴────────────────┴──────────┴─────────┴──────────┴──────┘

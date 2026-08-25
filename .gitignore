@@ -22,3 +22,6 @@ logs/*.log
 
 #exclude excel files
 outputs/
+# Google service-account credentials
+credentials/
+*.service-account.json
